@@ -1,0 +1,100 @@
+
+.areaUsuario{
+    grid-area: area-user;
+    padding-left: 60px;
+    padding-right: 60px;
+}
+.areaPlan{ 
+    grid-area: area-plan; 
+    padding-left: 60px;
+    padding-right: 60px;
+}
+.areaProyectos{ 
+    grid-area: area-proyectos; 
+    padding-left: 60px;
+}
+.areaDashboard{ 
+    grid-area: area-dashboard; 
+    padding-right: 60px;
+    padding-bottom: 6%;
+}
+
+.grid-container {
+    color: white;
+    display: grid;
+    grid-template-areas: 
+    'area-user area-user area-user' 
+    'area-plan area-plan area-plan' 
+    'area-proyectos area-dashboard area-dashboard' 
+    'area-proyectos area-dashboard area-dashboard' 
+    'area-proyectos area-dashboard area-dashboard';
+    gap: 10px;
+}
+
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-areas: 
+        'area-user area-user area-user' 
+        'area-plan area-plan area-plan' 
+        'area-proyectos area-proyectos area-proyectos' 
+        'area-dashboard area-dashboard area-dashboard';
+    }
+
+    .areaProyectos{ 
+        padding-right: 60px;
+    }
+    .areaDashboard{  
+        padding-left: 60px;
+        padding-bottom: 5%;
+        height: 200px;
+    }
+}
+
+@media (max-width: 576px) {
+    .areaDashboard{  
+        padding-bottom: 10%;
+    }
+}
+
+@media (max-width: 460px) {
+    .areaDashboard{  
+        padding-bottom: 15%;
+    }
+}
+
+.navbar-lateral {
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    margin-left: -300px;
+    background-color: white;/*#7952b3*/
+    transition: 0.4s;
+    border: 1px solid #040B25;
+}
+
+#my_container {
+    transition: 0.4s;
+}
+
+/* for navbar */
+.active-nav {
+    margin-left: 0;
+}
+
+/* for main section */
+.active-cont {
+    margin-left: 250px;
+}
+
+
+.iconos{
+    color: #7741BD; 
+    font-size: 22px;
+}
+
+.icon{
+    color: #7741BD; 
+    font-size: 30px;
+    padding-right: 10px;
+    
+}

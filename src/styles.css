@@ -1,0 +1,105 @@
+/* You can add global styles to this file, and also import other style files */
+
+/*INICIO estilos generales*/
+:root{
+    --color0: #040B25;
+    --color1: #11173B;
+    --color2: #2A2164;
+    --color3: #7741BD;
+}
+
+*{
+    box-sizing: border-box !important;
+}
+
+*::before, *::after {
+    box-sizing: inherit !important;
+}
+
+html,
+body,
+.container-fluid{
+    height: 100%;
+}
+
+.row{
+    height: 100%;
+}
+
+body{
+    background-color: var(--color1) !important;
+}
+
+.bg-image-tiger{
+    background-image: url('./assets/img/segundo_fondo.svg');
+    background-repeat: no-repeat;    
+}
+
+footer{
+    background-color: var(--color0);
+    color: white;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+/*FIN estilos generales*/
+
+/*INICIO estilos LOGIN*/
+.formulario{
+    background-color: var(--color2);
+    color: white;
+    width: 400px;
+    height: 500px;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.btn{
+    color: white !important;
+}
+
+.btn-login{
+    background-color: var(--color3) !important;
+    font-size: 20px !important;
+}
+
+.btn-ref{
+    background-color: var(--color0) !important;
+    width: 145px;
+    font-size: 13px !important;
+}
+
+.btn-registrase{
+    background-color: var(--color2) !important;
+}
+
+.btn-ref i{
+    color: var(--color3);
+}
+/*FIN estilos LOGIN*/
+
+.card-header{
+    background-color: var(--color3) !important;
+    width: 170px;
+    border-radius: 5px !important;
+    position: relative;/*relative*/
+    top: -25px;
+    left: calc(50% - 85px);
+}
+.card-body{
+    padding-top: 15px !important;
+    padding-bottom: 10px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+.card{
+    background-color: var(--color2) !important;
+    color: white;
+    position: static !important;
+}
+
+.contenedor-grip{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}

@@ -1,0 +1,156 @@
+<main id="page-content" class="d-flex justify-content-center align-items-center">
+    <div class="container-fluid contenedor-grip"><!--style="padding-top: 2%;"-->
+            <!-- INICIO IMAGEN-->
+            <div class="d-flex flex-column justify-content-center align-items-center"><!--style="padding-top: 18%;"-->
+                <img src="../../assets/img/engineering_team.svg" class="img-fluid" alt="" width="500px" height="500px">
+                <h1 style="color: white;">¡Unete a Tigershare Hoy!</h1>
+            </div><!-- FIN IMAGEN-->
+
+            <!-- INICIO Formulario-->
+            <div class="d-flex justify-content-center align-items-center" style="padding-bottom: 30%;"><!--style="padding-bottom: 30%;"-->
+                <form action="" class="formulario h-auto" [formGroup]="formularioRegistrarUsuario">
+                    <div class="d-xxl-flex d-xl-flex d-lg-flex d-md-block d-sm-block d-block">
+                        
+                        <!--Nombre-->
+                        <div class="mb-3 p-1">
+                            <label for="nameInput" class="form-label">Nombre</label>
+                            <input 
+                            formControlName="nombres"
+                            [ngClass]="{'input-error': nombres?.invalid && (nombres?.dirty || nombres?.touched)}"
+                            type="text" name="nombres" class="form-control" id="nameInput" 
+                            placeholder="Ingrese su nombre" required>
+
+                            <div *ngIf="nombres?.invalid && (nombres?.dirty || nombres?.touched)" class="error">
+                                <span *ngIf="nombres?.errors?.['required']">Sus nombres son obligatorio.</span>
+                                <span *ngIf="nombres?.errors?.['maxlength']">Cantidad máxima de caracteres es 30.</span>
+                            </div>
+                        </div>
+                        
+                        <!--Apellido-->
+                        <div class="mb-3 p-1">
+                            <label for="lastnameInput" class="form-label">Apellido</label>
+                            <input 
+                            formControlName="apellidos"
+                            [ngClass]="{'input-error': apellidos?.invalid && (apellidos?.dirty || apellidos?.touched)}"
+                            type="text" name="apellidos" class="form-control" id="lastnameInput" 
+                            placeholder="Ingrese su apellido" required>
+
+                            <div *ngIf="apellidos?.invalid && (apellidos?.dirty || apellidos?.touched)" class="error">
+                                <span *ngIf="apellidos?.errors?.['required']">Sus apellidos son obligatorio.</span>
+                                <span *ngIf="apellidos?.errors?.['maxlength']">Cantidad máxima de caracteres es 30.</span>
+                            </div>
+                        </div>
+                        <!--Fin Apellido-->
+                    </div>
+
+                    <!--correo electronico-->
+                    <div class="mb-3">
+                        <label for="emailInput" class="form-label">Correo electronico</label>
+                        <input 
+                        formControlName="email"
+                        [ngClass]="{'input-error': email?.invalid && (email?.dirty || email?.touched)}"
+                        type="email" name="email" class="form-control" id="emailInput" 
+                        placeholder="desarrollador@gmail.com" required>
+                    </div>
+                    <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="error">
+                        <span *ngIf="email?.errors?.['required']">Su correo electrónico es obligatorio.</span>
+                        <span *ngIf="email?.errors?.['maxlength']">Cantidad máxima de caracteres es 60.</span>
+                        <span *ngIf="email?.errors?.['pattern']">El correo electrónico que ingreso es invalido.</span>
+                    </div>
+                    <!--correo electronico-->
+
+                    <!--password-->
+                    <div class="mb-3">
+                        <label for="passwordInput" class="form-label">Contraseña</label>
+                        <input 
+                        formControlName="password"
+                        [ngClass]="{'input-error': password?.invalid && (password?.dirty || password?.touched)}"
+                        type="password" name="password" class="form-control" id="passwordInput" 
+                        placeholder="************" required>
+                    </div>
+                    <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="error">
+                        <span *ngIf="password?.errors?.['required']">Su contraseña es obligatoria.</span>
+                        <span *ngIf="password?.errors?.['maxlength']">Cantidad máxima de caracteres es 25.</span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="confirPasswordInput" class="form-label">Confirmar contraseña</label>
+                        <input 
+                        formControlName="confirPassword"
+                        [ngClass]="{'input-error': confirPassword?.invalid && (confirPassword?.dirty || confirPassword?.touched)}"
+                        type="password" name="confirPassword" class="form-control" id="confirPasswordInput" 
+                        placeholder="************" required>
+                    </div>
+                    <div *ngIf="confirPassword?.invalid && (confirPassword?.dirty || confirPassword?.touched)" class="error">
+                        <span *ngIf="confirPassword?.errors?.['required']">Su contraseña es obligatoria.</span>
+                        <span *ngIf="confirPassword?.errors?.['maxlength']">Cantidad máxima de caracteres es 25.</span>
+                    </div>
+                    <!--Fin password-->
+
+
+                    <div class="d-xxl-flex d-xl-flex d-lg-flex d-md-flex d-sm-block d-block">
+                        <!--Fecha de nacimiento-->
+                        <div class="mb-3 p-1">
+                            <label for="dateInput" class="form-label">Fecha de nacimiento</label>
+                            <input 
+                            formControlName="fechaNacimiento"
+                            [ngClass]="{'input-error': fechaNacimiento?.invalid && (fechaNacimiento?.dirty || fechaNacimiento?.touched)}"
+                            type="date" name="fechaNacimiento" class="form-control" id="dateInput" required>
+
+                            <div *ngIf="fechaNacimiento?.invalid && (fechaNacimiento?.dirty || fechaNacimiento?.touched)" class="error">
+                                <span *ngIf="fechaNacimiento?.errors?.['required']">Su fecha de nacimiento es obligatoria.</span>
+                            </div>
+                        </div>
+                        <!--Fin Fecha de nacimiento-->
+
+                        <!--Plan-->
+                        <div class="mb-3 p-1 col">
+                            <label for="planInput" class="form-label">Plan</label>
+                            <select 
+                            formControlName="plan"
+                            [ngClass]="{'input-error': plan?.invalid && (plan?.dirty || plan?.touched)}"
+                            class="form-select" name="plan" id="planInput" aria-label="Default select example">
+                                <option selected disabled>Plan</option>
+                                <option value="Rookie">Rookie</option>
+                                <option value="Elite">Elite</option>
+                                <option value="Ally">Ally</option>
+                            </select>
+
+                            <div *ngIf="plan?.invalid && (plan?.dirty || plan?.touched)" class="error">
+                                <span *ngIf="plan?.errors?.['required']">Su plan es obligatoria.</span>
+                            </div>
+                        </div>
+                        <!--Fin Plan-->
+                    </div>
+
+                    <!--Terminos y condiciones-->
+                    <div class="d-flex justify-content-between">
+                        <div class="form-check mb-3">
+                            <input 
+                            formControlName="terminosCondiciones"
+                            [ngClass]="{'input-error': terminosCondiciones?.invalid && (terminosCondiciones?.dirty || terminosCondiciones?.touched)}"
+                            class="form-check-input" type="checkbox" value="" id="flexCheckDefault" required>
+                            <label class="form-check-label" for="flexCheckDefault">Acepto terminos y condiciones</label>
+                        </div>
+                        <div class="mb-3">
+                            <button type="button" class="btn btn-login" [disabled]="!formularioRegistrarUsuario.valid" (click)="registrarse()">Registrarse</button>
+                        </div>
+                    </div>
+                    <!--Fin Terminos y condiciones-->
+
+                    <div *ngIf="terminosCondiciones?.invalid && (terminosCondiciones?.dirty || terminosCondiciones?.touched)" class="error">
+                        <span *ngIf="terminosCondiciones?.errors?.['required']">Debe aceptar terminos y condiciones.</span>
+                    </div>
+
+                    <!--Ingresar a facebook-->
+                    <div class="mb-3 d-flex justify-content-center align-items-center">
+                        <a href="" class="btn btn-ref">
+                            <fa-icon [icon]="faFacebook" class="iconos"></fa-icon> Ingresar con Facebook
+                        </a>
+                    </div>
+                    <!--Fin Ingresar a facebook-->
+
+                </form>
+            </div><!-- FIN Formulario-->
+    </div>
+</main>

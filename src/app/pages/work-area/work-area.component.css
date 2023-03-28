@@ -1,0 +1,79 @@
+
+.areaHtml { 
+    grid-area: area-html;
+    width: 700px;
+}
+
+.areaCss { 
+    grid-area: area-css; 
+    width: 700px;
+}
+
+.areaJs { 
+    grid-area: area-js; 
+    width: 700px;
+}
+
+.areaResultado { 
+    grid-area: area-resultado; 
+    width: 700px;
+    height: 440px;
+}
+
+.areaProyecto { 
+    grid-area: area-proyecto; 
+    width: 700px;
+}
+
+.grid-container {
+    display: grid;
+    color: white;
+    grid-template-areas: 'area-html area-proyecto' 'area-css area-resultado' 'area-js area-resultado';
+    gap: 10px;
+}
+
+@media (max-width: 1000px) {
+    .grid-container {
+        grid-template-areas: 
+        'area-proyecto' 
+        'area-html' 
+        'area-css' 
+        'area-js'
+        'area-resultado';
+    }
+
+    .areaResultado{
+        height: 240px;
+        padding-bottom: 10%;
+    }
+}
+
+@media (max-width: 740px) {
+    .areaResultado{
+        padding-bottom: 15%;
+    }
+}
+
+@media (max-width: 600px) {
+    .areaResultado{
+        padding-bottom: 20%;
+    }
+}
+
+@media (max-width: 460px) {
+    .areaResultado{
+        padding-bottom: 28%;
+        padding-right: 10%;
+    }
+    .areaHtml{
+        padding-right: 10%;
+    }
+
+    .areaCss{
+        padding-right: 10%;
+    }
+
+    .areaJs{
+        padding-right: 10%;
+    }
+}

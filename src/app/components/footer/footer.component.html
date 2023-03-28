@@ -1,0 +1,15 @@
+<footer id="sticky-footer" class="flex-shrink-0 py-4" *ngIf="router.url !== '/dashboard' && router.url !== '/work-area'">
+    <div class="d-flex justify-content-around align-items-center">
+        <div>
+            <h6>Contactanos</h6>
+            <a href="#" style="color: #7741BD;">info@tigershare.me</a>
+        </div>
+        <div>
+            <a href="#" class="iconos"><fa-icon [icon]="faFacebook"></fa-icon></a>
+            <a href="#" class="iconos"><fa-icon [icon]="faTwitter"></fa-icon></a>
+        </div>
+        <div>
+            <h6>Tigershare <fa-icon [icon]="faCopyright" style="color: #7741BD;"></fa-icon> 2023</h6>
+        </div>
+    </div>
+</footer>

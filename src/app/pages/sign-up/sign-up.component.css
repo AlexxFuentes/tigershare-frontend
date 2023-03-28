@@ -1,0 +1,26 @@
+:root{
+    --color0: #040B25;
+    --color1: #11173B;
+    --color2: #2A2164;
+    --color3: #7741BD;
+}
+
+.input-error{
+    border: 3px solid var(--color3);
+}
+
+.error{
+    text-align: center;
+    background-color: var(--color0);
+    border: 1px solid var(--color0);
+    color: var(--color3);
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    font-size: 1rem;
+}
+
+.iconos{
+    color: #7741BD; 
+    font-size: 16px;
+}

@@ -1,0 +1,53 @@
+<main id="page-content" class="h-100">
+    <div class="container-fluid d-flex justify-content-center align-items-center">
+
+        <form action="" class="formulario h-auto" style="margin-bottom: 160px;" [formGroup]="formularioInicioSesion">
+            <h1 class="text-center mt-4 mb-4">Iniciar Sesión</h1>
+
+            <!--Correo electronico-->
+            <div class="mb-3">
+                <label for="emailInput" class="form-label">Correo electronico</label>
+                <input 
+                    formControlName="email"
+                    [ngClass]="{'input-error': email?.invalid && (email?.dirty || email?.touched)}"
+                    type="email" name="email" class="form-control" id="emailInput" 
+                    placeholder="desarrollador@gmail.com" required>
+            </div>
+            <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="error">
+                <span *ngIf="email?.errors?.['required']">El correo electrónico es obligatorio.</span>
+                <span *ngIf="email?.errors?.['pattern']">El correo electrónico que ingreso es invalido.</span>
+            </div>
+            <!--Fin Correo electronico-->
+
+            <!--Password-->
+            <div class="mb-3">
+                <label for="passwordInput" class="form-label">Contraseña</label>
+                <input 
+                formControlName="password"
+                [ngClass]="{'input-error': password?.invalid && (password?.dirty || password?.touched)}"
+                type="password" name="password" class="form-control" id="passwordInput" 
+                placeholder="************" required>
+            </div>
+            <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="error">
+                <span *ngIf="password?.errors?.['required']">La contraseña es obligatoria.</span>
+                <span *ngIf="password?.errors?.['maxlength']">La contraseña no debe de tener más de 25 caracteres.</span>
+            </div>
+            <!--Password-->
+            <div class="mb-3 mt-4 text-center">
+                <button type="button" class="btn btn-login" 
+                    (click)="iniciarSesion()"
+                    [disabled]="!formularioInicioSesion.valid">
+                    Iniciar Sesión
+                </button>
+            </div>
+            <div class="contenedor-grip py-5 d-flex align-content-center justify-content-between">
+                <a href="" class="btn btn-ref">
+                    <fa-icon [icon]="faFacebook" class="iconos"></fa-icon> Ingresar con Facebook
+                </a>
+                <a href="" class="btn btn-ref">
+                    <fa-icon [icon]="faLock" class="iconos"></fa-icon> Olvide mi contraseña
+                </a>
+            </div>
+        </form>
+    </div>
+</main>

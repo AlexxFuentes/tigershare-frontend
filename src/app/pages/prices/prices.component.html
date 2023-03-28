@@ -1,0 +1,104 @@
+<main id="page-content">
+    <div class="container-fluid d-flex justify-content-center align-items-center"><!--style="background-color: #2A2164;"-->
+        <div class="row d-flex col-xxl-8 col-xl-8 col-lg-7 col-md-8 col-sm-10 col-12" style="padding-bottom: 10%; color: white;">
+
+            <!--INFO-->
+            <div class="contenedor-grip py-5">
+                <div class="d-flex flex-column justify-content-center">
+                    <h1>Precios</h1>
+                    <p>Tigershare es un servicio en la nube que se encarga de almacenar y hacer posible la
+                        colaboracion en linea.
+                        Ademas de muchos otros beneficios.
+                        Contamos con tres niveles de precios para nuestros servicios.
+                    </p>
+                    <div class="mb-3">
+                        <a class="btn btn-login" [routerLink]="['/sing-up']">Registrarte</a>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center align-content-center">
+                    <img src="../../assets/img/undraw_server_cluster_jwwq.svg" class="img-fluid" alt="">
+                </div>
+            </div><!--FIN INFO-->
+
+            <!--CARDS PRICES-->
+            <div class="contenedor-grip row row-cols-1 row-cols-md-2 g-4 d-flex align-content-center justify-content-center">
+                
+                <!--CARD ROOKIE-->
+                <div class="card text-center" style="width: 15rem;">
+                    <div class="card-header">
+                        <h5 class="card-title ">Rookie</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            3 Proyectos maximo.
+                        </p>
+                        <p class="card-text">
+                            Sin colaboracion en linea.
+                        </p>
+                        <p class="card-text">
+                            No se pueden cargar snippets.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <h3>Gratis</h3>
+                    </div>
+                </div><!--FIN CARD ROOKIE-->
+
+                <!--CARD ELITE-->
+                <div class="card text-center" style="width: 15rem;">
+                    <div class="card-header">
+                        <h5 class="card-title">Elite</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            Proyectos ilimitados (5GB de almacenamiento).
+                        </p>
+                        <p class="card-text">
+                            Hasta 10 colaboradores.
+                        </p>
+                        <p class="card-text">
+                            Se pueden cargar snippets.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <h2>$ 7.99/mes</h2>
+                    </div>
+                </div><!--FIN CARD ELITE-->
+
+                <!--CARD ALLY-->
+                <div class="card text-center" style="width: 15rem;">
+                    <div class="card-header">
+                        <h5 class="card-title">Ally</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            50 proyectos máximo.
+                        </p>
+                        <p class="card-text">
+                            Hasta 3 colaboradores.
+                        </p>
+                        <p class="card-text">
+                            Se pueden cargar snippets.
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <h2>$ 3.99/mes</h2>
+                    </div>
+                </div><!--FIN CARD ALLY-->
+
+            </div><!--FIN CARDS PRICES-->
+
+            <!--INICIO Únete a Tigershare hoy-->
+            <div class="d-flex flex-column justify-content-center align-items-center py-5">
+                <div class="mb-3">
+                    <a class="btn btn-login" [routerLink]="['/sing-up']">Únete a Tigershare hoy</a>
+                </div>
+                <div class="mb-3" style="color: #7741BD; font-size: 45px;">
+                    <i class="fa-brands fa-cc-visa px-1"></i>
+                    <i class="fa-brands fa-cc-mastercard px-1"></i>
+                </div>
+            </div><!--FIN Únete a Tigershare hoy-->
+
+        </div>
+    </div>
+</main>
