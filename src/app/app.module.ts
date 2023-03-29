@@ -15,7 +15,8 @@ import { LogInComponent } from './pages/log-in/log-in.component';
 import { PricesComponent } from './pages/prices/prices.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { WorkAreaComponent } from './pages/work-area/work-area.component';
-import { NotFoundComponent } from './pages/not-found/not-found.component'
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { MonacoEditorModule } from 'ngx-monaco-editor-v2'
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { NotFoundComponent } from './pages/not-found/not-found.component'
     FontAwesomeModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MonacoEditorModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
