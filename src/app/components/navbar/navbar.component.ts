@@ -7,7 +7,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+  interruptor = false;
 
   constructor(public router: Router) {}
 
+  open() {
+		this.interruptor = !this.interruptor;
+	}
 }

@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { faUserGear, faCode, faFolder, faGear, faCrown, faSquareArrowUpRight, faFolderClosed } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,6 +8,9 @@ import { faUserGear, faCode, faFolder, faGear, faCrown, faSquareArrowUpRight, fa
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
+  // Nav lateral
+  @ViewChild('sidebar') sidebar: ElementRef | undefined;
+  @ViewChild('my_container') myContenedor: ElementRef | undefined;
   // Font Awesome
   faUserGear = faUserGear;
   faCode = faCode;
@@ -15,18 +19,19 @@ export class DashboardComponent {
   faCrown = faCrown;
   faSquareArrowUpRight = faSquareArrowUpRight;
   faFolderClosed = faFolderClosed;
-  
-  // Nav lateral
-  @ViewChild('sidebar') sidebar: ElementRef | undefined;
-  @ViewChild('my_container') myContenedor: ElementRef | undefined;
+  interruptor = false;
 
-  ngAfterViewInit() {
-    
-  }
+  constructor(public router: Router) {}
 
   abrirNavLateral(){
     this.sidebar?.nativeElement.classList.toggle("active-nav");
     this.myContenedor?.nativeElement.classList.toggle("active-cont");
+    if(this.interruptor){
+      this.open();
+    }
   }
 
+  open() {
+		this.interruptor = !this.interruptor;
+	}
 }
