@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-//import { NgxMonacoEditorConfig } from 'ngx-monaco-editor';
+import { faUser, faCloud, faCode, faFolder } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-work-area',
@@ -11,56 +11,43 @@ export class WorkAreaComponent {
   @ViewChild('html') editorHtml: ElementRef | undefined;
   @ViewChild('css') editorCss: ElementRef | undefined;
   @ViewChild('js') editorJs: ElementRef | undefined;
+  // Font Awesome
+  faUser = faUser;
+  faCloud = faCloud;
+  faCode = faCode;
+  faFolder = faFolder;
+  // Code Editor
   codeJS: string = '';
   codeHTML: string = '';
   codeCSS: string = '';
-  optionsEditorCss = {
-    language: 'css',
-    theme: 'vs-dark', 
+  optionsEditor = {
     fontSize: 18,
     automaticLayout: true,
     fixedOverflowWidgets: true, //investigar
     scrollBeyondLastLine: false, //investigar
     roundedSelection: false, //investigar
     padding: {
-      top: 16
+      top: 10
     },
     lineNumbers: 'on', //off
     minimap: {
-      enabled: false //true
+      enabled: true //true
     }
+  }
+  optionsEditorCss = {
+    language: 'css',
+    theme: 'vs-dark', 
+    ...this.optionsEditor
   };
   optionsEditorHtml = {
     language: 'html',
     theme: 'vs-dark', 
-    fontSize: 18,
-    automaticLayout: true,
-    fixedOverflowWidgets: true, //investigar
-    scrollBeyondLastLine: false, //investigar
-    roundedSelection: false, //investigar
-    padding: {
-      top: 16
-    },
-    lineNumbers: 'on', //off
-    minimap: {
-      enabled: false //true
-    }
+    ...this.optionsEditor
   };
   optionsEditorJs = {
     language: 'javascript',
     theme: 'vs-dark', 
-    fontSize: 18,
-    automaticLayout: true,
-    fixedOverflowWidgets: true, //investigar
-    scrollBeyondLastLine: false, //investigar
-    roundedSelection: false, //investigar
-    padding: {
-      top: 16
-    },
-    lineNumbers: 'on', //off
-    minimap: {
-      enabled: false //true
-    }
+    ...this.optionsEditor
   };
 
   onCodeChange() {

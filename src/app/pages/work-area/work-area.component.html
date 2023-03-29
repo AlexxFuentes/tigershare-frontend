@@ -7,62 +7,62 @@
                 <div style="width: 100%;">
                     <!--Descripcion del proyecto y enlace-->
                     <div class="d-grid d-xxl-flex d-xl-flex d-lg-flex d-md-flex justify-content-between align-items-center">
-                        <div class="d-flex mb-3">
-                            <i class="fa-solid fa-folder" style="color: #7741BD; font-size: 50px;"></i>
+                        <div class="d-flex justify-content-center align-items-center">
+                            <fa-icon [icon]="faFolder"  style="color: #7741BD; font-size: 50px;"></fa-icon>
                             <h1 class="mx-3">Web example</h1>
                         </div>
                         <div class="d-flex mb-3">
-                            <i class="fa-solid fa-code pt-2"></i>
-                            <a href="#" class="m-1 text-decoration-none text-white">Copiar enlace</a>
+                            <a href="#" class="m-1 text-decoration-none text-white">
+                                <fa-icon [icon]="faCode" class="mx-1 pt-1" style="color: #7741BD;"></fa-icon>
+                                Copiar enlace
+                            </a>
                         </div>
                     </div><!--FIN Descripcion del proyecto y enlace-->
                     <!--Creado por y colaboradores-->
                     <div class="d-grid d-xxl-flex d-xl-flex d-lg-flex d-md-flex justify-content-between align-items-center">
-                        <div class="d-flex mb-3">
-                            <p><strong>Creado por: </strong><small>Última modificación: Hace 30 minutos.</small></p>
+                        <div class="d-flex justify-content-center align-items-center pt-2">
+                            <p><strong>Creado por: </strong> Alex <small> Última modificación: Hace 30 minutos.</small></p>
                         </div>
                         <!--Colaboradores-->
                         <div class="d-flex">
-                            <i class="fa-solid fa-cloud mx-1" style="color: #7741BD;"></i>
+                            <fa-icon [icon]="faCloud" class="mx-1" style="color: #7741BD;"></fa-icon>
                             <h6 class="mx-1">Colaboradores</h6>
-                            <i class="fa-solid fa-user mx-1" style="color: #7741BD;"></i>
-                            <i class="fa-solid fa-user mx-1" style="color: #7741BD;"></i>
-                            <i class="fa-solid fa-user mx-1" style="color: #7741BD;"></i>
+                            <fa-icon [icon]="faUser" class="mx-1" style="color: #7741BD;"></fa-icon>
+                            <fa-icon [icon]="faUser" class="mx-1" style="color: #7741BD;"></fa-icon>
+                            <fa-icon [icon]="faUser" class="mx-1" style="color: #7741BD;"></fa-icon>
                         </div><!--Fin Colaboradores-->
                     </div><!--FIN Creado por y colaboradores-->
                 </div>
             </div><!--FIN DESCRIPCION DEL PROYECTO-->
+
             <!--Editor HTML-->
             <div class="areaHtml">
                 <label for="htmlTextarea" class="form-label">HTML</label>
-
-                <ngx-monaco-editor style="width: 100%;" #html [options]="optionsEditorHtml" [(ngModel)]="codeHTML"
+                <ngx-monaco-editor #html [options]="optionsEditorHtml" [(ngModel)]="codeHTML"
                     (ngModelChange)="onCodeChange()" style="width: 100%;"></ngx-monaco-editor>
-
             </div><!--FIN Editor HTML-->
+
             <!--Editor CSS-->
             <div class="areaCss">
                 <label for="cssTextarea" class="form-label">CSS</label>
-
                 <ngx-monaco-editor #css [options]="optionsEditorCss" [(ngModel)]="codeCSS"
                     (ngModelChange)="onCodeChange()"></ngx-monaco-editor>
-
             </div><!--FIN Editor CSS-->
+
             <!--Editor JS-->
             <div class="areaJs">
                 <label for="jsTextarea" class="form-label">JavaScript</label>
-
                 <ngx-monaco-editor #js [options]="optionsEditorJs" [(ngModel)]="codeJS"
                     (ngModelChange)="onCodeChange()"></ngx-monaco-editor>
-
             </div><!--FIN Editor JS-->
+
             <!--RESULTADO-->
             <div class="areaResultado px-4">
                 <label for="resultadoTextarea" class="form-label">Resultado</label>
-
                 <iframe #resultCode srcdoc="" class="form-control h-100 w-100" id="resultadoTextarea"
                     frameborder="0"></iframe>
             </div><!--FIN RESULTADO-->
+
         </div><!--FIN CONTENEDOR GRID-->
     </div>
 </main>
