@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { faUser, faCloud, faCode, faFolder } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -6,7 +6,7 @@ import { faUser, faCloud, faCode, faFolder } from '@fortawesome/free-solid-svg-i
   templateUrl: './work-area.component.html',
   styleUrls: ['./work-area.component.css']
 })
-export class WorkAreaComponent {
+export class WorkAreaComponent implements OnInit {
   @ViewChild('resultCode') iframeResult: ElementRef | undefined;
   @ViewChild('html') editorHtml: ElementRef | undefined;
   @ViewChild('css') editorCss: ElementRef | undefined;
@@ -21,7 +21,7 @@ export class WorkAreaComponent {
   codeHTML: string = '';
   codeCSS: string = '';
   optionsEditor = {
-    fontSize: 18,
+    fontSize: 15,
     automaticLayout: true,
     fixedOverflowWidgets: true, //investigar
     scrollBeyondLastLine: false, //investigar
@@ -31,31 +31,35 @@ export class WorkAreaComponent {
     },
     lineNumbers: 'on', //off
     minimap: {
-      enabled: true //true
+      enabled: false //true
     }
   }
   optionsEditorCss = {
     language: 'css',
-    theme: 'vs-dark', 
+    theme: 'vs-dark',
     ...this.optionsEditor
   };
   optionsEditorHtml = {
     language: 'html',
-    theme: 'vs-dark', 
+    theme: 'vs-dark',
     ...this.optionsEditor
   };
   optionsEditorJs = {
     language: 'javascript',
-    theme: 'vs-dark', 
+    theme: 'vs-dark',
     ...this.optionsEditor
   };
+
+  constructor() { }
+  ngOnInit(): void {
+  }
 
   onCodeChange() {
     const htmlForPreview = this.createHtml(this.codeHTML, this.codeJS, this.codeCSS);
     this.iframeResult?.nativeElement.setAttribute('srcdoc', htmlForPreview);
   }
-  
-  createHtml(html: string, js: string, css: string){
+
+  createHtml(html: string, js: string, css: string) {
     return `
       <!DOCTYPE html>
       <html lang="en">

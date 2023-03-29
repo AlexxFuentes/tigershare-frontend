@@ -1,79 +1,59 @@
+/*nueva estructura*/
 
-.areaHtml { 
-    grid-area: area-html;
-    width: 700px;
-}
-
-.areaCss { 
-    grid-area: area-css; 
-    width: 700px;
-}
-
-.areaJs { 
-    grid-area: area-js; 
-    width: 700px;
-}
-
-.areaResultado { 
-    grid-area: area-resultado; 
-    width: 700px;
-    height: 440px;
-}
-
-.areaProyecto { 
-    grid-area: area-proyecto; 
-    width: 700px;
-}
-
-.grid-container {
+/*contenedor grid*/
+.container-grid {
     display: grid;
-    color: white;
-    grid-template-areas: 'area-html area-proyecto' 'area-css area-resultado' 'area-js area-resultado';
-    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(700px, 1fr));
+    gap: 8px;
+    flex-wrap: wrap;
+    padding-bottom: 30px;
+    height: 90vh;
+    width: 100%;
 }
 
-@media (max-width: 1000px) {
-    .grid-container {
-        grid-template-areas: 
-        'area-proyecto' 
-        'area-html' 
-        'area-css' 
-        'area-js'
-        'area-resultado';
-    }
-
-    .areaResultado{
-        height: 240px;
-        padding-bottom: 10%;
-    }
+.item-grid {
+    height: 100%;
 }
 
-@media (max-width: 740px) {
-    .areaResultado{
-        padding-bottom: 15%;
-    }
+.editor {
+    height: 90%;
 }
 
-@media (max-width: 600px) {
-    .areaResultado{
-        padding-bottom: 20%;
+@media (max-width: 768px) {
+    .container-grid {
+        grid-template-columns: 1fr;
+        height: auto;
+        padding-bottom: 50px;
     }
 }
+/*fin contenedor grid*/
+/*Fin nueva estructura*/
 
-@media (max-width: 460px) {
-    .areaResultado{
-        padding-bottom: 28%;
-        padding-right: 10%;
-    }
-    .areaHtml{
-        padding-right: 10%;
-    }
 
-    .areaCss{
-        padding-right: 10%;
-    }
-
-    .areaJs{
-        padding-right: 10%;
-    }
+/*INICIO split-grid*/
+/* .grid {
+    display: grid;
+    grid-template-columns: 49.8% 10px 49.8%;
+    grid-template-rows: 49.8% 10px 49.8%;
+    height: 90vh;
 }
+
+.gutter-col {
+    grid-row: 1/-1;
+    cursor: col-resize;
+}
+
+.gutter-col-1 {
+    grid-column: 2;
+}
+
+.gutter-row {
+    grid-column: 1/-1;
+    cursor: row-resize;
+}
+
+.gutter-row-1 {
+    grid-row: 2;
+} */
+
+/* FIN split-grid*/
