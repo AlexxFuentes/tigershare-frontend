@@ -21,6 +21,7 @@ export class WorkAreaComponent {
   codeHTML: string = '';
   codeCSS: string = '';
   optionsEditor = {
+    theme: 'vs-dark', //  'vs-dark', 'vs', 'hc-black'
     fontSize: 18,
     automaticLayout: true,
     fixedOverflowWidgets: true, //investigar
@@ -31,25 +32,22 @@ export class WorkAreaComponent {
     },
     lineNumbers: 'on', //off
     minimap: {
-      enabled: true //true
+      enabled: false //true
     }
   }
   optionsEditorCss = {
-    language: 'css',
-    theme: 'vs-dark', 
+    language: 'css', 
     ...this.optionsEditor
   };
   optionsEditorHtml = {
     language: 'html',
-    theme: 'vs-dark', 
     ...this.optionsEditor
   };
   optionsEditorJs = {
     language: 'javascript',
-    theme: 'vs-dark', 
     ...this.optionsEditor
   };
-
+  
   onCodeChange() {
     const htmlForPreview = this.createHtml(this.codeHTML, this.codeJS, this.codeCSS);
     this.iframeResult?.nativeElement.setAttribute('srcdoc', htmlForPreview);
