@@ -21,6 +21,7 @@ export class WorkAreaComponent implements OnInit {
   codeHTML: string = '';
   codeCSS: string = '';
   optionsEditor = {
+    theme: 'vs-dark',
     fontSize: 15,
     automaticLayout: true,
     fixedOverflowWidgets: true, //investigar
@@ -36,17 +37,14 @@ export class WorkAreaComponent implements OnInit {
   }
   optionsEditorCss = {
     language: 'css',
-    theme: 'vs-dark',
     ...this.optionsEditor
   };
   optionsEditorHtml = {
     language: 'html',
-    theme: 'vs-dark',
     ...this.optionsEditor
   };
   optionsEditorJs = {
     language: 'javascript',
-    theme: 'vs-dark',
     ...this.optionsEditor
   };
 
