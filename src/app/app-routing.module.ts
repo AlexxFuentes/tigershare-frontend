@@ -7,13 +7,14 @@ import { PricesComponent } from './pages/prices/prices.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { WorkAreaComponent } from './pages/work-area/work-area.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { ConfigurationsComponent } from './pages/dashboard/components/configurations/configurations.component';
 
 const routes: Routes = [
   {path: '', component: LandingPageComponent},
   {path: 'sing-up', component: SignUpComponent},
   {path: 'prices', component: PricesComponent},
   {path: 'log-in', component: LogInComponent, children:[]},
-  {path: 'dashboard', component: DashboardComponent},
+  {path: 'dashboard', component: DashboardComponent },
   {path: 'work-area', component: WorkAreaComponent},
   {path: '**', component: NotFoundComponent}
 ];

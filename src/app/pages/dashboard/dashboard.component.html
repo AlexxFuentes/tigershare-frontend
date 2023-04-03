@@ -23,7 +23,7 @@
 
 <main id="page-content" class="h-100 p-0">
     <div class="container-fluid p-0">
-        <nav class="navbar-lateral navbar-expand d-flex flex-column align-item-start" #sidebar
+        <nav #sidebar class="navbar-lateral active-nav navbar-expand d-flex flex-column align-item-start" 
             style="background-color: #040B25;">
             <div class="d-flex justify-content-center pt-3">
                 <img class="menu_btn" (click)="abrirNavLateral()" src="../../assets/img/TIGERSHARE.png" alt=""
@@ -32,120 +32,47 @@
             <div class="h-100 d-flex flex-column justify-content-around align-items-center">
                 <ul class="list-group-flush">
                     <li class="list-group-item py-4">
-                        <a href="#" class="text-decoration-none d-flex" style="color: white;">
+                        <button (click)="dashboardVisibles()" class="btn text-decoration-none d-flex" style="color: white;">
+                            <fa-icon [icon]="faUserGear" class="iconos"></fa-icon>
+                            <p class="px-2">Dashboard</p>
+                        </button>
+                    </li>
+                    <li class="list-group-item py-4">
+                        <button (click)="generalInfoVisible()" class="btn text-decoration-none d-flex" style="color: white;">
                             <fa-icon [icon]="faUserGear" class="iconos"></fa-icon>
                             <p class="px-2">Información general</p>
-                        </a>
+                        </button>
                     </li>
                     <li class="list-group-item py-4">
-                        <a href="#" class="text-decoration-none d-flex" style="color: white;">
+                        <button (click)="snippetsVisible()" class="btn text-decoration-none d-flex" style="color: white;">
                             <fa-icon [icon]="faCode" class="iconos"></fa-icon>
                             <p class="px-2">Snippets</p>
-                        </a>
+                        </button>
                     </li>
                     <li class="list-group-item py-4">
-                        <a href="#" class="text-decoration-none d-flex" style="color: white;">
+                        <button (click)="projectsVisible()" class="btn text-decoration-none d-flex" style="color: white;">
                             <fa-icon [icon]="faFolder" class="iconos"></fa-icon>
                             <p class="px-2">Proyectos</p>
-                        </a>
+                        </button>
                     </li>
                 </ul>
                 <ul class="list-group-flush">
                     <li class="list-group-item">
-                        <a href="#" class="text-decoration-none d-flex" style="color: white;">
+                        <button (click)="configurationsVisible()" class="btn text-decoration-none d-flex" style="color: white;">
                             <fa-icon [icon]="faGear" class="iconos"></fa-icon>
                             <p class="px-2">Configuración</p>
-                        </a>
+                        </button>
                     </li>
                 </ul>
             </div>
         </nav>
 
-        <section #my_container class="pt-5">
-            <div class="grid-container h-100">
-
-                <!--DESCRIPCION USUARIO-->
-                <div class="areaUsuario d-flex justify-content-between align-items-center">
-                    <h4>Bienvenido, Alex</h4>
-                    <img src="../../assets/img/male_avatar_.svg" alt="" width="50px" height="50px">
-                </div><!--DESCRIPCION USUARIO-->
-
-                <!--AREA PLAN ACTUAL-->
-                <div class="areaPlan">
-                    <!--CARD PLAN ACTUAL-->
-                    <div class="card"><!--style="width: 100%;"-->
-                        <div class="card-body d-flex justify-content-between">
-                            <div class="d-flex flex-column justify-content-between">
-                                <p class="card-text">
-                                    Actualmente cuentas con con un plan:
-                                </p>
-                                <p class="card-text">
-                                    <fa-icon [icon]="faCrown" class="icon"></fa-icon>Elite
-                                </p>
-                            </div>
-                            <div>
-                                <img src="../../assets/img/undraw_freelancer_re_irh4.svg" class="img-fluid" alt=""
-                                    width="200px">
-                            </div>
-                        </div>
-                    </div><!--CARD PLAN ACTUAL-->
-                </div><!--FIN AREA PLAN ACTUAL-->
-
-                <!--AREA DE PROYECTOS-->
-                <div class="areaProyectos">
-                    <h4 class="px-3">Últimos proyectos</h4>
-                    <div class="card mb-3"><!--style="width: 100%;"-->
-                        <div class="card-body">
-                            <div class="d-flex">
-                                <fa-icon [icon]="faFolderClosed" class="icon"></fa-icon>
-                                <h4 class="mx-2">Web example</h4>
-                            </div>
-                            <div class="d-flex justify-content-between mt-3">
-                                <h6 class="card-text" style="font-size: 15px;">Ultima modificacion hace: 30 min</h6>
-                                <fa-icon [icon]="faSquareArrowUpRight" class="icon"></fa-icon>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card mb-3"><!--style="width: 100%;"-->
-                        <div class="card-body">
-                            <div class="d-flex">
-                                <fa-icon [icon]="faFolderClosed" class="icon"></fa-icon>
-                                <h4 class="mx-2">Web example</h4>
-                            </div>
-                            <div class="d-flex justify-content-between mt-3">
-                                <h6 class="card-text" style="font-size: 15px;">Ultima modificacion hace: 30 min</h6>
-                                <fa-icon [icon]="faSquareArrowUpRight" class="icon"></fa-icon>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card mb-3"><!--style="width: 100%;"-->
-                        <div class="card-body">
-                            <div class="d-flex">
-                                <fa-icon [icon]="faFolderClosed" class="icon"></fa-icon>
-                                <h4 class="mx-2">Web example</h4>
-                            </div>
-                            <div class="d-flex justify-content-between mt-3">
-                                <h6 class="card-text" style="font-size: 15px;">Ultima modificacion hace: 30 min</h6>
-                                <fa-icon [icon]="faSquareArrowUpRight" class="icon"></fa-icon>
-                            </div>
-                        </div>
-                    </div>
-
-                </div><!--FIN AREA DE PROYECTOS-->
-
-                <!--AREA DEL DASHBOARD-->
-                <div class="areaDashboard">
-                    <h4 class="px-3">Almacenamiento</h4>
-                    <div class="card h-100">
-                        <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                            <h1>DASHBOARD</h1>
-                        </div>
-                    </div>
-                </div><!--FIN AREA DEL DASHBOARD-->
-            </div>
-
-        </section>
+        <!-- Opciones Menu lateral -->
+        <app-configurations #configurations *ngIf="configVisibles" ></app-configurations>
+        <app-dashboard-main #mainDashboard *ngIf="dashboardVisible" ></app-dashboard-main>
+        <app-general-informations #generalInformations *ngIf="generalInfoVisibles" ></app-general-informations>
+        <app-projects #projects *ngIf="projectsVisibles" ></app-projects>
+        <app-snippets #snippets *ngIf="snippestVisibles" ></app-snippets>
+        
     </div>
 </main>

@@ -1,0 +1,86 @@
+<section class="pt-5" [ngClass]="{'active-cont': !interruptor}">
+    <div class="grid-container h-100">
+
+        <!--DESCRIPCION USUARIO-->
+        <div class="areaUsuario d-flex justify-content-between align-items-center">
+            <h4>Bienvenido, Alex</h4>
+            <img src="../../assets/img/male_avatar_.svg" alt="" width="50px" height="50px">
+        </div><!--DESCRIPCION USUARIO-->
+
+        <!--AREA PLAN ACTUAL-->
+        <div class="areaPlan">
+            <!--CARD PLAN ACTUAL-->
+            <div class="card"><!--style="width: 100%;"-->
+                <div class="card-body d-flex justify-content-between">
+                    <div class="d-flex flex-column justify-content-between">
+                        <p class="card-text">
+                            Actualmente cuentas con con un plan:
+                        </p>
+                        <p class="card-text">
+                            <fa-icon [icon]="faCrown" class="icon"></fa-icon>Elite
+                        </p>
+                    </div>
+                    <div>
+                        <img src="../../assets/img/undraw_freelancer_re_irh4.svg" class="img-fluid" alt=""
+                            width="200px">
+                    </div>
+                </div>
+            </div><!--CARD PLAN ACTUAL-->
+        </div><!--FIN AREA PLAN ACTUAL-->
+
+        <!--AREA DE PROYECTOS-->
+        <div class="areaProyectos">
+            <h4 class="px-3">Últimos proyectos</h4>
+            <div class="card mb-3"><!--style="width: 100%;"-->
+                <div class="card-body">
+                    <div class="d-flex">
+                        <fa-icon [icon]="faFolderClosed" class="icon"></fa-icon>
+                        <h4 class="mx-2">Web example</h4>
+                    </div>
+                    <div class="d-flex justify-content-between mt-3">
+                        <h6 class="card-text" style="font-size: 15px;">Ultima modificacion hace: 30 min</h6>
+                        <fa-icon [icon]="faSquareArrowUpRight" class="icon"></fa-icon>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3"><!--style="width: 100%;"-->
+                <div class="card-body">
+                    <div class="d-flex">
+                        <fa-icon [icon]="faFolderClosed" class="icon"></fa-icon>
+                        <h4 class="mx-2">Web example</h4>
+                    </div>
+                    <div class="d-flex justify-content-between mt-3">
+                        <h6 class="card-text" style="font-size: 15px;">Ultima modificacion hace: 30 min</h6>
+                        <fa-icon [icon]="faSquareArrowUpRight" class="icon"></fa-icon>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-3"><!--style="width: 100%;"-->
+                <div class="card-body">
+                    <div class="d-flex">
+                        <fa-icon [icon]="faFolderClosed" class="icon"></fa-icon>
+                        <h4 class="mx-2">Web example</h4>
+                    </div>
+                    <div class="d-flex justify-content-between mt-3">
+                        <h6 class="card-text" style="font-size: 15px;">Ultima modificacion hace: 30 min</h6>
+                        <fa-icon [icon]="faSquareArrowUpRight" class="icon"></fa-icon>
+                    </div>
+                </div>
+            </div>
+
+        </div><!--FIN AREA DE PROYECTOS-->
+
+        <!--AREA DEL DASHBOARD-->
+        <div class="areaDashboard">
+            <h4 class="px-3">Almacenamiento</h4>
+            <div class="card h-100">
+                <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                    <h1>DASHBOARD</h1>
+                </div>
+            </div>
+        </div><!--FIN AREA DEL DASHBOARD-->
+    </div>
+
+</section>

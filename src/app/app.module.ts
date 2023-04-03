@@ -17,6 +17,11 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { WorkAreaComponent } from './pages/work-area/work-area.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { MonacoEditorModule } from 'ngx-monaco-editor-v2'
+import { DashboardMainComponent } from './pages/dashboard/components/dashboard-main/dashboard-main.component';
+import { ProjectsComponent } from './pages/dashboard/components/projects/projects.component';
+import { SnippetsComponent } from './pages/dashboard/components/snippets/snippets.component';
+import { ConfigurationsComponent } from './pages/dashboard/components/configurations/configurations.component';
+import { GeneralInformationsComponent } from './pages/dashboard/components/general-informations/general-informations.component';
 
 
 @NgModule({
@@ -25,6 +30,11 @@ import { MonacoEditorModule } from 'ngx-monaco-editor-v2'
     FooterComponent,
     NavbarComponent,
     DashboardComponent,
+    DashboardMainComponent,
+    ProjectsComponent,
+    SnippetsComponent,
+    ConfigurationsComponent,
+    GeneralInformationsComponent,
     LandingPageComponent,
     LogInComponent,
     PricesComponent,

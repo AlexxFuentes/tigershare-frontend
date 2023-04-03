@@ -1,0 +1,15 @@
+.active-cont {
+    transition: 0.4s;
+    margin-left: 250px;
+}
+
+.iconos{
+    color: #7741BD; 
+    font-size: 22px;
+}
+
+.icon{
+    color: #7741BD; 
+    font-size: 30px;
+    padding-right: 10px;
+}
