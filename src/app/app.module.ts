@@ -21,8 +21,6 @@ import { DashboardMainComponent } from './pages/dashboard/components/dashboard-m
 import { ProjectsComponent } from './pages/dashboard/components/projects/projects.component';
 import { SnippetsComponent } from './pages/dashboard/components/snippets/snippets.component';
 import { ConfigurationsComponent } from './pages/dashboard/components/configurations/configurations.component';
-import { GeneralInformationsComponent } from './pages/dashboard/components/general-informations/general-informations.component';
-
 
 @NgModule({
   declarations: [
@@ -34,7 +32,6 @@ import { GeneralInformationsComponent } from './pages/dashboard/components/gener
     ProjectsComponent,
     SnippetsComponent,
     ConfigurationsComponent,
-    GeneralInformationsComponent,
     LandingPageComponent,
     LogInComponent,
     PricesComponent,

@@ -1,9 +1,10 @@
-import { Component, ElementRef, OnInit, Output, ViewChild } from '@angular/core';
-import { faUserGear, faCode, faFolder, faGear } from '@fortawesome/free-solid-svg-icons';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { faUserGear, faCode, faFolder, faGear, faUserSecret } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { DashboardMainComponent } from './components/dashboard-main/dashboard-main.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { SnippetsComponent } from './components/snippets/snippets.component';
+import { ConfigurationsComponent } from './components/configurations/configurations.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,11 +17,11 @@ export class DashboardComponent implements OnInit {
   @ViewChild('mainDashboard') mainDashboard: DashboardMainComponent | undefined;
   @ViewChild('projects') projects: ProjectsComponent | undefined;
   @ViewChild('snippets') snippets: SnippetsComponent | undefined;
+  @ViewChild('configurations') configurations: ConfigurationsComponent | undefined;
   interruptor = false;
   // Area visibles
   configVisibles = false;
   dashboardVisible = true;
-  generalInfoVisibles = false;
   projectsVisibles = false;
   snippestVisibles = false;
   // Font Awesome
@@ -39,6 +40,7 @@ export class DashboardComponent implements OnInit {
     this.mainDashboard?.open();
     this.projects?.open();
     this.snippets?.open();
+    this.configurations?.open();
     this.sidebar?.nativeElement.classList.toggle('active-nav');
     if (this.interruptor) {
       this.open();
@@ -47,41 +49,21 @@ export class DashboardComponent implements OnInit {
 
   open() {
     this.interruptor = !this.interruptor;
+    if(this.sidebar?.nativeElement.classList.contains('active-nav')){
+      this.sidebar?.nativeElement.classList.toggle('active-nav');
+      this.mainDashboard?.open();
+      this.projects?.open();
+      this.snippets?.open();
+      this.configurations?.open();
+    }
   }
 
-  dashboardVisibles(){
-    this.configVisibles = false;
-    this.dashboardVisible = true;
-    this.generalInfoVisibles = false;
-    this.projectsVisibles = false;
-    this.snippestVisibles = false;
-  }
-  configurationsVisible(){
-    this.configVisibles = true;
-    this.dashboardVisible = false;
-    this.generalInfoVisibles = false;
-    this.projectsVisibles = false;
-    this.snippestVisibles = false;
-  }
-  generalInfoVisible(){
-    this.configVisibles = false;
-    this.dashboardVisible = false;
-    this.generalInfoVisibles = true;
-    this.projectsVisibles = false;
-    this.snippestVisibles = false;
-  }
-  projectsVisible(){
-    this.configVisibles = false;
-    this.dashboardVisible = false;
-    this.generalInfoVisibles = false;
-    this.projectsVisibles = true;
-    this.snippestVisibles = false;
-  }
-  snippetsVisible(){
-    this.configVisibles = false;
-    this.dashboardVisible = false;
-    this.generalInfoVisibles = false;
-    this.projectsVisibles = false;
-    this.snippestVisibles = true;
+  setVisibilidad(configVisibles: boolean, dashboardVisible: boolean, 
+    projectsVisibles: boolean, snippestVisibles: boolean
+  ) {
+    this.configVisibles = configVisibles;
+    this.dashboardVisible = dashboardVisible;
+    this.projectsVisibles = projectsVisibles;
+    this.snippestVisibles = snippestVisibles;
   }
 }
