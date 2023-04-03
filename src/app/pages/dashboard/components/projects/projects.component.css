@@ -1,5 +1,4 @@
-
-:root{
+:root {
     --color0: #040B25;
     --color1: #11173B;
     --color2: #2A2164;
@@ -11,18 +10,22 @@
     margin-left: 250px;
 }
 
-.iconos{
-    color: var(--color3); 
+.iconos {
+    color: var(--color3);
     font-size: 22px;
 }
 
-.icon{
-    color: var(--color3); 
+.icon {
+    color: var(--color3);
     font-size: 30px;
     padding-right: 10px;
 }
 
-.card { 
+strong {
+    font-size: 25px;
+}
+
+.card {
     margin: 20px;
     border-radius: 10px;
 }
@@ -37,11 +40,11 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: var(--color0); /* Color del "thumb" (parte móvil del scroll) */
-    border-radius: 5px; /* Radio de borde del "thumb" */
+    background-color: var(--color0);/* Color del "thumb" (parte móvil del scroll) */
+    border-radius: 5px;/* Radio de borde del "thumb" */
 }
 
 ::-webkit-scrollbar-track {
-    background-color: var(--color3); /* Color del "track" (parte fija del scroll) */
-    border-radius: 5px; /* Radio de borde del "track" */
+    background-color: var(--color3);/* Color del "track" (parte fija del scroll) */
+    border-radius: 5px;/* Radio de borde del "track" */
 }
