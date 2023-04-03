@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { faUserGear, faCode, faFolder, faGear, faCrown, faSquareArrowUpRight, faFolderClosed } from '@fortawesome/free-solid-svg-icons';
+import { faFolderClosed, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-configurations',
@@ -8,13 +8,7 @@ import { faUserGear, faCode, faFolder, faGear, faCrown, faSquareArrowUpRight, fa
 })
 export class ConfigurationsComponent {
   // Font Awesome
-  faUserGear = faUserGear;
-  faCode = faCode;
-  faFolder = faFolder;
-  faGear = faGear;
-  faCrown = faCrown;
-  faSquareArrowUpRight = faSquareArrowUpRight;
-  faFolderClosed = faFolderClosed;
+  faPenToSquare = faPenToSquare;
   // variables
   interruptor: boolean = false;
 

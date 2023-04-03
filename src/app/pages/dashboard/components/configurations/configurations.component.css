@@ -1,16 +1,23 @@
+:root{
+    --color0: #040B25;
+    --color1: #11173B;
+    --color2: #2A2164;
+    --color3: #7741BD;
+}
 
 .active-cont {
     transition: 0.4s;
     margin-left: 250px;
 }
 
-.iconos{
-    color: #7741BD; 
-    font-size: 22px;
+.icon {
+    color: var(--color3); 
+    font-size: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
-.icon{
-    color: #7741BD; 
-    font-size: 30px;
-    padding-right: 10px;
+.form-check-input:checked {
+    background-color: var(--color3);
+    border-color: var(--color3);
 }

@@ -1,16 +1,47 @@
 
+:root{
+    --color0: #040B25;
+    --color1: #11173B;
+    --color2: #2A2164;
+    --color3: #7741BD;
+}
+
 .active-cont {
     transition: 0.4s;
     margin-left: 250px;
 }
 
 .iconos{
-    color: #7741BD; 
+    color: var(--color3); 
     font-size: 22px;
 }
 
 .icon{
-    color: #7741BD; 
+    color: var(--color3); 
     font-size: 30px;
     padding-right: 10px;
+}
+
+.card { 
+    margin: 20px;
+    border-radius: 10px;
+}
+
+.card-body {
+    background-color: var(--color1);
+    border-radius: 9px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--color0); /* Color del "thumb" (parte móvil del scroll) */
+    border-radius: 5px; /* Radio de borde del "thumb" */
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--color3); /* Color del "track" (parte fija del scroll) */
+    border-radius: 5px; /* Radio de borde del "track" */
 }
