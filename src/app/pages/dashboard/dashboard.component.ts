@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { faUserGear, faCode, faFolder, faGear, faUserSecret } from '@fortawesome/free-solid-svg-icons';
+import { faUserGear, faCode, faFolder, faGear, faFileCode } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { DashboardMainComponent } from './components/dashboard-main/dashboard-main.component';
 import { ProjectsComponent } from './components/projects/projects.component';
@@ -30,6 +30,7 @@ export class DashboardComponent implements OnInit {
   faCode = faCode;
   faFolder = faFolder;
   faGear = faGear;
+  faFileCode = faFileCode;
 
   constructor(public router: Router, private authService: AuthService) {}
 

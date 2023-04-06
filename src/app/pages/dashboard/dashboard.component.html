@@ -38,6 +38,12 @@
                         </button>
                     </li>
                     <li class="list-group-item py-3">
+                        <a class="btn" *ngIf="router.url !== '/'" [routerLink]="['/work-area']">
+                            <fa-icon [icon]="faFileCode" class="iconos px-2"></fa-icon>
+                            Área de trabajo
+                        </a>
+                    </li>
+                    <li class="list-group-item py-3">
                         <button (click)="setVisibilidad(false, false, false, true)" class="btn d-flex align-items-center">
                             <fa-icon [icon]="faCode" class="iconos px-2"></fa-icon>
                             <small>Snippets</small>
