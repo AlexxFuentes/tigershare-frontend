@@ -13,7 +13,7 @@
         <div class="collapse navbar-collapse justify-content-end" [ngClass]="{'show': interruptor}" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item px-2">
-                    <a class="btn" [routerLink]="['/']">Cerrar Sesión</a>
+                    <a class="btn" (click)="cerrarSesion()">Cerrar Sesión</a>
                 </li>
             </ul>
         </div>

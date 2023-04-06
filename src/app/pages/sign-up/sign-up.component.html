@@ -21,7 +21,7 @@
                             placeholder="Ingrese su nombre" required>
 
                             <div *ngIf="nombres?.invalid && (nombres?.dirty || nombres?.touched)" class="error">
-                                <span *ngIf="nombres?.errors?.['required']">Sus nombres son obligatorio.</span>
+                                <span *ngIf="nombres?.errors?.['required']">Su nombre es obligatorio.</span>
                                 <span *ngIf="nombres?.errors?.['maxlength']">Cantidad máxima de caracteres es 30.</span>
                             </div>
                         </div>
@@ -36,12 +36,27 @@
                             placeholder="Ingrese su apellido" required>
 
                             <div *ngIf="apellidos?.invalid && (apellidos?.dirty || apellidos?.touched)" class="error">
-                                <span *ngIf="apellidos?.errors?.['required']">Sus apellidos son obligatorio.</span>
+                                <span *ngIf="apellidos?.errors?.['required']">Su apellido es obligatorio.</span>
                                 <span *ngIf="apellidos?.errors?.['maxlength']">Cantidad máxima de caracteres es 30.</span>
                             </div>
                         </div>
                         <!--Fin Apellido-->
                     </div>
+
+                    <!--nombre de usuario-->
+                    <div class="mb-3">
+                        <label for="UserInput" class="form-label">Nombre de usuario</label>
+                        <input 
+                        formControlName="user"
+                        [ngClass]="{'input-error': user?.invalid && (user?.dirty || user?.touched)}"
+                        type="text" name="user" class="form-control" id="UserInput" 
+                        placeholder="Nombre de usuario" required>
+                    </div>
+                    <div *ngIf="user?.invalid && (user?.dirty || user?.touched)" class="error">
+                        <span *ngIf="user?.errors?.['required']">Su nombre de usuario es obligatorio.</span>
+                        <span *ngIf="user?.errors?.['maxlength']">Cantidad máxima de caracteres es 30.</span>
+                    </div>
+                    <!--nombre de usuario-->
 
                     <!--correo electronico-->
                     <div class="mb-3">
@@ -66,24 +81,32 @@
                         formControlName="password"
                         [ngClass]="{'input-error': password?.invalid && (password?.dirty || password?.touched)}"
                         type="password" name="password" class="form-control" id="passwordInput" 
-                        placeholder="************" required>
+                        placeholder="************" required ><!--(blur)="matchPassword()"-->
                     </div>
                     <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="error">
                         <span *ngIf="password?.errors?.['required']">Su contraseña es obligatoria.</span>
                         <span *ngIf="password?.errors?.['maxlength']">Cantidad máxima de caracteres es 25.</span>
+                        
+                        <div *ngIf="password?.updateOn">
+                            <span *ngIf="password?.errors?.['matchPassword']">Las contraseñas no coinciden.</span>
+                        </div>
                     </div>
 
                     <div class="mb-3">
-                        <label for="confirPasswordInput" class="form-label">Confirmar contraseña</label>
+                        <label for="confirmPasswordInput" class="form-label">Confirmar contraseña</label>
                         <input 
-                        formControlName="confirPassword"
-                        [ngClass]="{'input-error': confirPassword?.invalid && (confirPassword?.dirty || confirPassword?.touched)}"
+                        formControlName="confirmPassword"
+                        [ngClass]="{'input-error': confirmPassword?.invalid && (confirmPassword?.dirty || confirmPassword?.touched)}"
                         type="password" name="confirPassword" class="form-control" id="confirPasswordInput" 
-                        placeholder="************" required>
+                        placeholder="************" required ><!--(blur)="matchPassword()"-->
                     </div>
-                    <div *ngIf="confirPassword?.invalid && (confirPassword?.dirty || confirPassword?.touched)" class="error">
-                        <span *ngIf="confirPassword?.errors?.['required']">Su contraseña es obligatoria.</span>
-                        <span *ngIf="confirPassword?.errors?.['maxlength']">Cantidad máxima de caracteres es 25.</span>
+                    <div *ngIf="confirmPassword?.invalid && (confirmPassword?.dirty || confirmPassword?.touched)" class="error">
+                        <span *ngIf="confirmPassword?.errors?.['required']">Su contraseña es obligatoria.</span>
+                        <span *ngIf="confirmPassword?.errors?.['maxlength']">Cantidad máxima de caracteres es 25.</span>
+                        
+                        <div *ngIf="confirmPassword?.updateOn">
+                            <span *ngIf="confirmPassword?.errors?.['matchPassword']">Las contraseñas no coinciden.</span>
+                        </div>
                     </div>
                     <!--Fin password-->
 
@@ -95,7 +118,7 @@
                             <input 
                             formControlName="fechaNacimiento"
                             [ngClass]="{'input-error': fechaNacimiento?.invalid && (fechaNacimiento?.dirty || fechaNacimiento?.touched)}"
-                            type="date" name="fechaNacimiento" class="form-control" id="dateInput" required>
+                            type="date" name="fechaNacimiento" class="form-control" id="dateInput" min="1950-01-01" max="2015-01-01" required>
 
                             <div *ngIf="fechaNacimiento?.invalid && (fechaNacimiento?.dirty || fechaNacimiento?.touched)" class="error">
                                 <span *ngIf="fechaNacimiento?.errors?.['required']">Su fecha de nacimiento es obligatoria.</span>
@@ -133,7 +156,7 @@
                             <label class="form-check-label" for="flexCheckDefault">Acepto terminos y condiciones</label>
                         </div>
                         <div class="mb-3">
-                            <button type="button" class="btn btn-login" [disabled]="!formularioRegistrarUsuario.valid" (click)="registrarse()">Registrarse</button>
+                            <button type="button" class="btn btn-login" [disabled]="!formularioRegistrarUsuario.valid" (click)="registrarUsuario()">Registrarse</button><!---->
                         </div>
                     </div>
                     <!--Fin Terminos y condiciones-->

@@ -5,6 +5,7 @@ import { DashboardMainComponent } from './components/dashboard-main/dashboard-ma
 import { ProjectsComponent } from './components/projects/projects.component';
 import { SnippetsComponent } from './components/snippets/snippets.component';
 import { ConfigurationsComponent } from './components/configurations/configurations.component';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -30,10 +31,13 @@ export class DashboardComponent implements OnInit {
   faFolder = faFolder;
   faGear = faGear;
 
-  constructor(public router: Router) {}
+  constructor(public router: Router, private authService: AuthService) {}
 
-  ngOnInit(): void {
-    
+  ngOnInit(): void {}
+
+  cerrarSesion() {
+    this.authService.logOut();
+    this.router.navigate(['log-in']);  
   }
 
   abrirNavLateral() {

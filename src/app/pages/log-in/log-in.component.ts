@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
+import { UsuariosService } from 'src/app/services/usuarios.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { CreateLoginDto } from 'src/app/models/login.dto';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-log-in',
@@ -18,7 +22,7 @@ export class LogInComponent {
     password: new FormControl('', [Validators.required, Validators.maxLength(25)]),
   });
   
-  constructor() {}
+  constructor(private usrService: UsuariosService, private authService: AuthService, private router: Router) {}
   
   get email() {
     return this.formularioInicioSesion.get('email');
@@ -29,9 +33,21 @@ export class LogInComponent {
   }
   
   iniciarSesion() {
-    console.log(this.formularioInicioSesion);
-    console.log(this.formularioInicioSesion.value);
-    console.log(this.formularioInicioSesion.valid);
+    if(this.formularioInicioSesion.valid) {
+      const { email, password } = this.formularioInicioSesion.value;
+      const dataLogin = new CreateLoginDto(email ?? '', password ?? '');
+
+      this.usrService.singIn(dataLogin).subscribe(
+        (data) => {
+          //console.log(data);
+          this.authService.token = data.token;
+          this.router.navigate(['dashboard']);
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+    }
   }
 
 }
