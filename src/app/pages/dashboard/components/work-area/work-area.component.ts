@@ -75,6 +75,7 @@ export class WorkAreaComponent implements OnInit {
         </body>
       </html>`;
   }
+  
   open(){
     this.interruptor = !this.interruptor;
   }

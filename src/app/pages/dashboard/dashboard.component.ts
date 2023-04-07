@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { faUserGear, faCode, faFolder, faGear, faFileCode } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { DashboardMainComponent } from './components/dashboard-main/dashboard-main.component';
@@ -14,7 +14,6 @@ import { WorkAreaComponent } from './components/work-area/work-area.component';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  // Nav lateral
   @ViewChild('sidebar') sidebar: ElementRef | undefined;
   @ViewChild('mainDashboard') mainDashboard: DashboardMainComponent | undefined;
   @ViewChild('projects') projects: ProjectsComponent | undefined;
