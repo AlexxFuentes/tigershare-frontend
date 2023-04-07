@@ -11,6 +11,8 @@ export class WorkAreaComponent implements OnInit {
   @ViewChild('html') editorHtml: ElementRef | undefined;
   @ViewChild('css') editorCss: ElementRef | undefined;
   @ViewChild('js') editorJs: ElementRef | undefined;
+  // variables
+  interruptor: boolean = false;
   // Font Awesome
   faUser = faUser;
   faCloud = faCloud;
@@ -48,9 +50,8 @@ export class WorkAreaComponent implements OnInit {
     ...this.optionsEditor
   };
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
+  
   onCodeChange() {
     const htmlForPreview = this.createHtml(this.codeHTML, this.codeJS, this.codeCSS);
     this.iframeResult?.nativeElement.setAttribute('srcdoc', htmlForPreview);
@@ -73,5 +74,8 @@ export class WorkAreaComponent implements OnInit {
           </script>
         </body>
       </html>`;
+  }
+  open(){
+    this.interruptor = !this.interruptor;
   }
 }

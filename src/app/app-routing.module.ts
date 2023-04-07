@@ -5,7 +5,7 @@ import { LandingPageComponent } from './pages/landing-page/landing-page.componen
 import { LogInComponent } from './pages/log-in/log-in.component';
 import { PricesComponent } from './pages/prices/prices.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
-import { WorkAreaComponent } from './pages/work-area/work-area.component';
+import { WorkAreaComponent } from './pages/dashboard/components/work-area/work-area.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AuthGuardService } from './services/auth-guard.service';
 
