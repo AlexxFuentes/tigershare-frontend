@@ -19,6 +19,11 @@
     height: 90%;
 }
 
+.active-cont {
+    transition: 0.4s;
+    margin-left: 250px;
+}
+
 @media (max-width: 768px) {
     .container-grid {
         grid-template-columns: 1fr;

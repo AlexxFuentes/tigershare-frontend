@@ -69,7 +69,8 @@ export class DashboardComponent implements OnInit {
   }
 
   setVisibilidad(configVisibles: boolean, dashboardVisible: boolean, 
-    projectsVisibles: boolean, snippestVisibles: boolean, workAreaVisible: boolean) {
+    projectsVisibles: boolean, snippestVisibles: boolean, workAreaVisible: boolean
+  ) {
     this.configVisibles = configVisibles;
     this.dashboardVisible = dashboardVisible;
     this.projectsVisibles = projectsVisibles;
