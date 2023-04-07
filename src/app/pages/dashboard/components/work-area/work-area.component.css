@@ -24,13 +24,21 @@
     margin-left: 250px;
 }
 
-@media (max-width: 768px) {
+@media only screen and   (max-width: 768px) {
     .container-grid {
         grid-template-columns: 1fr;
         height: auto;
         padding-bottom: 50px;
     }
 }
+
+@media only screen and (max-width: 600px) {
+    .active-cont {
+        margin-left: 0px;
+    }
+}
+
+
 /*fin contenedor grid*/
 /*Fin nueva estructura*/
 

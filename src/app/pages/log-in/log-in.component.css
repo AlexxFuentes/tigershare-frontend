@@ -5,6 +5,12 @@
     --color3: #7741BD;
 }
 
+.contenedor-grip{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
 .input-error{
     border: 3px solid var(--color3);
 }

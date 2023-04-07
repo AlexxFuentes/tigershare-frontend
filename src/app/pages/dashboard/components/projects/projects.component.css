@@ -5,28 +5,32 @@
     --color3: #7741BD;
 }
 
+.contenedor-grip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+}
+
+.scroll-area {
+    background-color: var(--color2);
+    border-radius: 1%;
+    height: 600px;
+}
+
 .active-cont {
     transition: 0.4s;
     margin-left: 250px;
-}
-
-.iconos {
-    color: var(--color3);
-    font-size: 22px;
 }
 
 .icon {
     color: var(--color3);
     font-size: 30px;
     padding-right: 10px;
-}
-
-strong {
-    font-size: 25px;
+    padding-right: 10px;
+    padding-left: 10px;
 }
 
 .card {
-    margin: 20px;
+    margin: 10px;
     border-radius: 10px;
 }
 
@@ -47,4 +51,13 @@ strong {
 ::-webkit-scrollbar-track {
     background-color: var(--color3);/* Color del "track" (parte fija del scroll) */
     border-radius: 5px;/* Radio de borde del "track" */
+}
+
+@media only screen and (max-width: 600px) {
+    .scroll-area {
+        height: 800px;
+    }
+    .active-cont {
+        margin-left: 0px;
+    }
 }

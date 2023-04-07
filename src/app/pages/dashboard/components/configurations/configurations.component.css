@@ -21,3 +21,9 @@
     background-color: var(--color3);
     border-color: var(--color3);
 }
+
+@media only screen and (max-width: 600px) {
+    .active-cont {
+        margin-left: 0px;
+    }
+}

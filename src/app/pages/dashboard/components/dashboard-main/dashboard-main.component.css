@@ -1,3 +1,9 @@
+:root {
+    --color0: #040B25;
+    --color1: #11173B;
+    --color2: #2A2164;
+    --color3: #7741BD;
+}
 
 .areaUsuario{
     grid-area: area-user;
@@ -20,7 +26,7 @@
 }
 
 .grid-container {
-    color: white;
+    color: #FFF;
     display: grid;
     grid-template-areas: 
     'area-user area-user area-user' 
@@ -29,6 +35,25 @@
     'area-proyectos area-dashboard area-dashboard' 
     'area-proyectos area-dashboard area-dashboard';
     gap: 10px;
+}
+
+.active-cont {
+    margin-left: 250px;
+}
+
+.iconos {
+    color: var(--color3); 
+    font-size: 22px;
+}
+
+.icon {
+    color: var(--color3); 
+    font-size: 30px;
+    padding-right: 10px;
+}
+
+strong {
+    font-size: 20px;
 }
 
 @media (max-width: 768px) {
@@ -61,21 +86,8 @@
     }
 }
 
-.active-cont {
-    margin-left: 250px;
-}
-
-.iconos {
-    color: #7741BD; 
-    font-size: 22px;
-}
-
-.icon {
-    color: #7741BD; 
-    font-size: 30px;
-    padding-right: 10px;
-}
-
-strong {
-    font-size: 20px;
+@media only screen and (max-width: 600px) {
+    .active-cont {
+        margin-left: 0px;
+    }
 }
