@@ -32,46 +32,40 @@
             <div class="h-100 d-flex flex-column justify-content-around align-items-center" style="color: white;">
                 <ul class="list-group-flush">
                     <li class="list-group-item py-3">
-                        <button (click)="setVisibilidad(false, true, false, false, false)" class="btn d-flex align-items-center">
+                        <a class="btn" [routerLink]="['./general-information']">
                             <fa-icon [icon]="faUserGear" class="iconos px-2"></fa-icon>
-                            <small>Información general</small>
-                        </button>
+                            Información general
+                        </a>
                     </li>
                     <li class="list-group-item py-3">
-                        <button (click)="setVisibilidad(false, false, false, false, true)" class="btn d-flex align-items-center">
-                            <fa-icon [icon]="faUserGear" class="iconos px-2"></fa-icon>
-                            <small>Área de trabajo</small>
-                        </button>
+                        <a class="btn" [routerLink]="['./work-area']">
+                            <fa-icon [icon]="faFileCode" class="iconos px-2"></fa-icon>
+                            Área de trabajo
+                        </a>
                     </li>
                     <li class="list-group-item py-3">
-                        <button (click)="setVisibilidad(false, false, false, true, false)" class="btn d-flex align-items-center">
+                        <a class="btn" [routerLink]="['./snippets']">
                             <fa-icon [icon]="faCode" class="iconos px-2"></fa-icon>
-                            <small>Snippets</small>
-                        </button>
+                            Snippets
+                        </a>
                     </li>
                     <li class="list-group-item py-3">
-                        <button (click)="setVisibilidad(false, false, true, false, false)" class="btn d-flex align-items-center">
+                        <a class="btn" [routerLink]="['./projects']">
                             <fa-icon [icon]="faFolder" class="iconos px-2"></fa-icon>
-                            <small>Proyectos</small>
-                        </button>
+                            Proyectos
+                        </a>
                     </li>
                 </ul>
                 <ul class="list-group-flush w-100">
                     <li class="list-group-item">
-                        <button (click)="setVisibilidad(true, false, false, false, false)" class="btn d-flex align-items-center">
+                        <a class="btn" [routerLink]="['./configurations']">
                             <fa-icon [icon]="faGear" class="iconos px-2"></fa-icon>
-                            <small>Configuración</small>
-                        </button>
+                            Configuración
+                        </a>
                     </li>
                 </ul>
             </div>
         </nav>
-
-        <!-- Opciones Menu lateral -->
-        <app-configurations #configurations *ngIf="configVisibles"></app-configurations>
-        <app-dashboard-main #mainDashboard *ngIf="dashboardVisible"></app-dashboard-main>
-        <app-projects #projects *ngIf="projectsVisibles"></app-projects>
-        <app-snippets #snippets *ngIf="snippestVisibles"></app-snippets>
-        <app-work-area #workArea *ngIf="workAreaVisible" ></app-work-area>
+        <router-outlet></router-outlet>
     </div>
 </main>
