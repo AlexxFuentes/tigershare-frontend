@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { faFileCode, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { ComunicacionService } from 'src/app/services/comunicacion.service';
 
 @Component({
   selector: 'app-snippets',
@@ -12,6 +13,12 @@ export class SnippetsComponent {
   faTrashCan = faTrashCan;
   // variables
   interruptor: boolean = false;
+
+  constructor(private comunicacion: ComunicacionService) {}
+
+  ngOnInit(): void {
+    this.comunicacion.actualizar$.subscribe(() => this.open());
+  }
 
   open(){
     this.interruptor = !this.interruptor;

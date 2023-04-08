@@ -7,6 +7,7 @@ import { SnippetsComponent } from './components/snippets/snippets.component';
 import { ConfigurationsComponent } from './components/configurations/configurations.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { WorkAreaComponent } from './components/work-area/work-area.component';
+import { ComunicacionService } from 'src/app/services/comunicacion.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -34,16 +35,24 @@ export class DashboardComponent implements OnInit {
   faGear = faGear;
   faFileCode = faFileCode;
 
-  constructor(public router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router, 
+    private authService: AuthService,
+    private comunication: ComunicacionService
+  ) {}
 
   ngOnInit(): void {}
 
   cerrarSesion() {
     this.authService.logOut();
     this.router.navigate(['log-in']);  
+    localStorage.setItem('codeHTML', '');
+    localStorage.setItem('codeJS', '');
+    localStorage.setItem('codeCSS', '');
   }
 
   abrirNavLateral() {
+    this.comunication.actualizar();
     this.mainDashboard?.open();
     this.projects?.open();
     this.snippets?.open();

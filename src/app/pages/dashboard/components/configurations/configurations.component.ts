@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { faFolderClosed, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import { ComunicacionService } from 'src/app/services/comunicacion.service';
 
 @Component({
   selector: 'app-configurations',
@@ -11,6 +12,12 @@ export class ConfigurationsComponent {
   faPenToSquare = faPenToSquare;
   // variables
   interruptor: boolean = false;
+
+  constructor(private comunicacion: ComunicacionService) {}
+
+  ngOnInit(): void {
+    this.comunicacion.actualizar$.subscribe(() => this.open());
+  }
 
   open(){
     this.interruptor = !this.interruptor;

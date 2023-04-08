@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { faUser, faCloud, faCode, faFolder } from '@fortawesome/free-solid-svg-icons';
+import { ComunicacionService } from 'src/app/services/comunicacion.service';
 
 @Component({
   selector: 'app-work-area',
@@ -50,11 +51,24 @@ export class WorkAreaComponent implements OnInit {
     ...this.optionsEditor
   };
 
-  ngOnInit(): void {}
+  constructor(private comunicacion: ComunicacionService) {}
+  
+  ngOnInit(): void {
+    // Obtener las variables del localStorage
+    this.codeHTML = localStorage.getItem('codeHTML') || '';
+    this.codeJS = localStorage.getItem('codeJS') || '';
+    this.codeCSS = localStorage.getItem('codeCSS') || '';
+    this.comunicacion.actualizar$.subscribe(() => this.open());
+  }
   
   onCodeChange() {
     const htmlForPreview = this.createHtml(this.codeHTML, this.codeJS, this.codeCSS);
     this.iframeResult?.nativeElement.setAttribute('srcdoc', htmlForPreview);
+
+    // Guardar las variables en el localStorage
+    localStorage.setItem('codeHTML', this.codeHTML);
+    localStorage.setItem('codeJS', this.codeJS);
+    localStorage.setItem('codeCSS', this.codeCSS);
   }
 
   createHtml(html: string, js: string, css: string) {

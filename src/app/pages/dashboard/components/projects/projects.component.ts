@@ -3,6 +3,7 @@ import {
   faSquareArrowUpRight,
   faFolderClosed,
 } from '@fortawesome/free-solid-svg-icons';
+import { ComunicacionService } from 'src/app/services/comunicacion.service';
 
 @Component({
   selector: 'app-projects',
@@ -15,6 +16,12 @@ export class ProjectsComponent {
   faSquareArrowUpRight = faSquareArrowUpRight;
   // variables
   interruptor: boolean = false;
+
+  constructor(private comunicacion: ComunicacionService) {}
+
+  ngOnInit(): void {
+    this.comunicacion.actualizar$.subscribe(() => this.open());
+  }
 
   open() {
     this.interruptor = !this.interruptor;
