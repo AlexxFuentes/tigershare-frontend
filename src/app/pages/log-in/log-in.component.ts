@@ -41,7 +41,7 @@ export class LogInComponent {
         (data) => {
           //console.log(data);
           this.authService.token = data.token;
-          this.router.navigate(['dashboard/general-information']);
+          this.router.navigate(['home/general-information']);
         },
         (error) => {
           console.log(error);

@@ -5,11 +5,11 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ComunicacionService } from 'src/app/services/comunicacion.service';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css'],
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class HomeComponent {
   @ViewChild('sidebar') sidebar: ElementRef | undefined;
   interruptor = false;
   // Font Awesome
