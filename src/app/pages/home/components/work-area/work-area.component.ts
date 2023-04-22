@@ -1,6 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { faUser, faCloud, faCode, faFolder } from '@fortawesome/free-solid-svg-icons';
 import { ComunicacionService } from 'src/app/services/comunicacion.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ProyectosService } from 'src/app/services/proyectos.service';
+import { CreateProjectDto } from 'src/app/models/project.dto';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Token } from 'monaco-editor';
 
 @Component({
   selector: 'app-work-area',
@@ -12,6 +17,17 @@ export class WorkAreaComponent implements OnInit {
   @ViewChild('html') editorHtml: ElementRef | undefined;
   @ViewChild('css') editorCss: ElementRef | undefined;
   @ViewChild('js') editorJs: ElementRef | undefined;
+  newProject: any = {}
+  projectDatails: boolean = false;
+  
+  formularioNewProject = new FormGroup({
+    nombre: new FormControl('', [Validators.required, Validators.maxLength(35)]),
+  });
+
+  get nombre() {
+    return this.formularioNewProject.get('nombre');
+  }
+
   // variables
   interruptor: boolean = false;
   // Font Awesome
@@ -51,7 +67,11 @@ export class WorkAreaComponent implements OnInit {
     ...this.optionsEditor
   };
 
-  constructor(private comunicacion: ComunicacionService) {}
+  constructor(
+    private comunicacion: ComunicacionService, 
+    private projectService: ProyectosService,
+    private modalService: NgbModal
+  ) {}
   
   ngOnInit(): void {
     // Obtener las variables del localStorage
@@ -92,5 +112,33 @@ export class WorkAreaComponent implements OnInit {
   
   open(){
     this.interruptor = !this.interruptor;
+  }
+
+  openModalNuevoProyecto(content: any) {
+		this.modalService.open(content, { centered: true, ariaLabelledBy: 'modal-basic-title'});
+	}
+
+  createNewProject() {
+    this.modalService.dismissAll();
+    const { nombre } = this.formularioNewProject.value;
+    const dataNewProject = new CreateProjectDto(
+      sessionStorage.getItem('token') ?? '',
+      nombre ?? ''
+    );
+    console.log(dataNewProject);
+    this.projectService.createNewProject(dataNewProject).subscribe(
+      (res) => {
+        console.log(res);
+        this.newProject = res;
+        this.projectDatails = true;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  getRange(n: number): number[] {
+    return Array.from({length: n}, (_, i) => i + 1);
   }
 }

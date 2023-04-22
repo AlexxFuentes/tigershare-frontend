@@ -16,6 +16,8 @@ export class LogInComponent {
   // Font Awesome
   faFacebook = faFacebook;
   faLock = faLock;
+  // variables
+  statusCode: number = 0;
 
   formularioInicioSesion = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")]),//^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$
@@ -36,15 +38,14 @@ export class LogInComponent {
     if(this.formularioInicioSesion.valid) {
       const { email, password } = this.formularioInicioSesion.value;
       const dataLogin = new CreateLoginDto(email ?? '', password ?? '');
-
       this.usrService.singIn(dataLogin).subscribe(
         (data) => {
-          //console.log(data);
           this.authService.token = data.token;
           this.router.navigate(['home/general-information']);
         },
         (error) => {
           console.log(error);
+          this.statusCode = error.error.statusCode;
         }
       )
     }

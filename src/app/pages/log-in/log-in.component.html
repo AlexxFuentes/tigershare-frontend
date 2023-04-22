@@ -6,7 +6,7 @@
 
             <!--Correo electronico-->
             <div class="mb-3">
-                <label for="emailInput" class="form-label">Correo electronico</label>
+                <label for="emailInput" class="form-label">Correo electrónico</label>
                 <input 
                     formControlName="email"
                     [ngClass]="{'input-error': email?.invalid && (email?.dirty || email?.touched)}"
@@ -32,6 +32,15 @@
                 <span *ngIf="password?.errors?.['required']">La contraseña es obligatoria.</span>
                 <span *ngIf="password?.errors?.['maxlength']">La contraseña no debe de tener más de 25 caracteres.</span>
             </div>
+
+            <div *ngIf="statusCode === 401" class="error">
+                <span>Credenciales incorrectas</span>
+            </div>
+
+            <div *ngIf="statusCode === 200" class="error">
+                <span>Credenciales correctas</span>
+            </div>
+
             <!--Password-->
             <div class="mb-3 mt-4 text-center">
                 <button type="button" class="btn btn-login" 

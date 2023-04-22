@@ -1,33 +1,37 @@
 <section class="pt-5 pb-5" [ngClass]="{'active-cont': !interruptor}">
     <div class="container-fluid" style="color: #FFF;">
 
-        <div class="pt-4 px-4 w-100">
+        <div class="py-5" *ngIf="!projectDatails">
+            <button class="btn" (click)="openModalNuevoProyecto(content)">Crear nuevo proyecto</button>
+        </div>
+        <div class="pt-4 px-4 w-100" *ngIf="projectDatails">
             <!--Descripcion del proyecto y enlace-->
             <div class="d-grid d-xxl-flex d-xl-flex d-lg-flex d-md-flex justify-content-between align-items-center">
                 <div class="d-flex justify-content-center align-items-center">
                     <fa-icon [icon]="faFolder" style="color: #7741BD; font-size: 50px;"></fa-icon>
-                    <h1 class="mx-3">Web example</h1>
+                    <h1 class="mx-3">{{newProject?.nombre}}</h1>
                 </div>
                 <div class="d-flex mb-3">
-                    <a href="#" class="m-1 text-decoration-none text-white">
+                    <button class="m-1 text-white">
                         <fa-icon [icon]="faCode" class="mx-1 pt-1" style="color: #7741BD;"></fa-icon>
                         Copiar enlace
-                    </a>
+                    </button>
                 </div>
             </div><!--FIN Descripcion del proyecto y enlace-->
             <!--Creado por y colaboradores-->
             <div class="d-grid d-xxl-flex d-xl-flex d-lg-flex d-md-flex justify-content-between align-items-center">
                 <div class="d-flex justify-content-center align-items-center pt-2">
-                    <p><strong>Creado por: </strong> Alex Fuentes <br><small> Última modificación: Hace 30
-                            minutos.</small></p>
+                    <p>
+                        <strong>Creado por: </strong> {{newProject?.creador?.nombre}} {{newProject?.creador?.apellido}}
+                        <br>
+                        <small>Última modificación: {{newProject?.u_mod}}</small>
+                    </p>
                 </div>
                 <!--Colaboradores-->
-                <div class="d-flex">
-                    <fa-icon [icon]="faCloud" class="mx-1" style="color: #7741BD;"></fa-icon>
+                <div class="d-flex" *ngIf="newProject?.colaboradores.length">
                     <h6 class="mx-1">Colaboradores</h6>
-                    <fa-icon [icon]="faUser" class="mx-1" style="color: #7741BD;"></fa-icon>
-                    <fa-icon [icon]="faUser" class="mx-1" style="color: #7741BD;"></fa-icon>
-                    <fa-icon [icon]="faUser" class="mx-1" style="color: #7741BD;"></fa-icon>
+                    <fa-icon *ngFor="let n of getRange(newProject?.colaboradores.length)" 
+                    [icon]="faCloud" class="mx-1" style="color: #7741BD;"></fa-icon>
                 </div><!--Fin Colaboradores-->
             </div><!--FIN Creado por y colaboradores-->
         </div>
@@ -56,3 +60,31 @@
 
     </div>
 </section>
+
+
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Nuevo proyecto</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<form [formGroup]="formularioNewProject">
+			<div class="mb-3">
+                <label for="new-project" class="form-label">Nombre del nuevo proyecto</label>
+                <input 
+                formControlName="nombre"
+                [ngClass]="{'input-error': nombre?.invalid && nombre?.touched}"
+                name="nombre"
+                type="text" class="form-control" id="new-project">
+            </div>
+            <div *ngIf="nombre?.invalid && (nombre?.dirty || nombre?.touched)" class="error">
+                <span *ngIf="nombre?.errors?.['required']">El nombre del proyecto es obligatorio</span>
+            </div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn" (click)="createNewProject()">Guardar</button>
+	</div>
+</ng-template>
+
+<!--modal.close('Save click')-->
