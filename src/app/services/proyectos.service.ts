@@ -29,6 +29,7 @@ export class ProyectosService {
   }
 
   updateProject(id_project: string, newData: any): Observable<any> {
-    return this.httpClient.put(`${this.api}/proyecto/actualizar/${id_project}`, newData);
+    const nuevaRaiz = newData;
+    return this.httpClient.put(`${this.api}/proyecto/actualizar/${id_project}`, nuevaRaiz);
   }
 }

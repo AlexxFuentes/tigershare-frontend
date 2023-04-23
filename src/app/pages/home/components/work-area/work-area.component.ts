@@ -75,17 +75,16 @@ export class WorkAreaComponent implements OnInit {
     this.comunicacion.getDataProject$().subscribe((data) => {
       this.dataProject = data;
       localStorage.setItem('id_project', this.dataProject._id);
-      this.codeCSS = data.css;
-      this.codeHTML = data.html;
-      this.codeJS = data.js;
+      this.codeCSS = data.raiz.css;
+      this.codeHTML = data.raiz.html;
+      this.codeJS = data.raiz.js;
     });
   }
   
   onCodeChange() {
     const htmlForPreview = this.createHtml(this.codeHTML, this.codeJS, this.codeCSS);
     this.iframeResult?.nativeElement.setAttribute('srcdoc', htmlForPreview);
-    //this.haveChanges = true;
-    // Guardar las variables en el localStorage
+    // Guardar cambios en el localStorage
     localStorage.setItem('codeHTML', this.codeHTML);
     localStorage.setItem('codeJS', this.codeJS);
     localStorage.setItem('codeCSS', this.codeCSS);
@@ -93,8 +92,11 @@ export class WorkAreaComponent implements OnInit {
 
   getProjectById(id_project: string) {
     this.projectService.getProjectById(id_project).subscribe(
-      (res) => {
-        this.dataProject = res;
+      (data) => {
+        this.dataProject = data;
+        this.codeCSS = data.raiz.css;
+        this.codeHTML = data.raiz.html;
+        this.codeJS = data.raiz.js;
       },
       (err) => {
         console.log(err);
@@ -110,17 +112,14 @@ export class WorkAreaComponent implements OnInit {
       css: localStorage.getItem('codeCSS'),
     }
     console.log(dataNewProject);
-    // this.projectService.updateProject(this.newProject._id, dataNewProject).subscribe(
-    //   (res) => {
-    //     console.log(res);
-    //     this.newProject = res;
-    //     this.projectDatails = true;
-    //     this.router.navigate(['/home/work-area', this.newProject._id]);
-    //   },
-    //   (err) => {
-    //     console.log(err);
-    //   }
-    // );
+    this.projectService.updateProject(id_project, dataNewProject).subscribe(
+      (res) => {
+        console.log(res);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   saveChanges() {
