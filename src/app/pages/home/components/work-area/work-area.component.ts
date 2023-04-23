@@ -3,6 +3,7 @@ import { faUser, faCloud, faCode, faFolder, faFileExport } from '@fortawesome/fr
 import { ComunicacionService } from 'src/app/services/comunicacion.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProyectosService } from 'src/app/services/proyectos.service';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-work-area',
@@ -61,6 +62,7 @@ export class WorkAreaComponent implements OnInit {
     private comunicacion: ComunicacionService, 
     private projectService: ProyectosService,
     private modalService: NgbModal, 
+    private router: Router,
   ) { 
     this.getProjectById(localStorage.getItem('id_project') || '');
   }
@@ -78,6 +80,16 @@ export class WorkAreaComponent implements OnInit {
       this.codeCSS = data.raiz.css;
       this.codeHTML = data.raiz.html;
       this.codeJS = data.raiz.js;
+    });
+
+    let previousUrl = '';
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        if (previousUrl && previousUrl !== event.url) {
+          localStorage.removeItem('id_project');
+        }
+        previousUrl = event.url;
+      }
     });
   }
   
@@ -123,7 +135,6 @@ export class WorkAreaComponent implements OnInit {
   }
 
   saveChanges() {
-    // Guardar cambios en el proyecto
     console.log('Guardando cambios');
     //this.haveChanges = false;
     this.modalService.dismissAll();
