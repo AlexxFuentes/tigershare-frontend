@@ -43,6 +43,7 @@ export class ProjectsComponent implements OnInit{
   ngOnInit(): void {
     this.comunicacion.actualizar$.subscribe(() => this.open());
     this.getAllsProjects();
+    localStorage.removeItem('id_project');
   }
 
   open() {

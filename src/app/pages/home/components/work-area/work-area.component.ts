@@ -82,6 +82,7 @@ export class WorkAreaComponent implements OnInit {
       this.codeCSS = data.raiz.css;
       this.codeHTML = data.raiz.html;
       this.codeJS = data.raiz.js;
+      this.onCodeChange();
     });
 
     let previousUrl = '';
@@ -115,10 +116,19 @@ export class WorkAreaComponent implements OnInit {
   getProjectById(id_project: string) {
     this.projectService.getProjectById(id_project).subscribe(
       (data) => {
+        // this.dataProject = data;
+        // localStorage.setItem('id_project', this.dataProject._id);
+        // this.codeCSS = data.raiz.css;
+        // this.codeHTML = data.raiz.html;
+        // this.codeJS = data.raiz.js;
+
         this.dataProject = data;
+        console.log(this.dataProject);
+        localStorage.setItem('id_project', this.dataProject._id);
         this.codeCSS = data.raiz.css;
         this.codeHTML = data.raiz.html;
         this.codeJS = data.raiz.js;
+        this.onCodeChange();
       },
       (err) => {
         console.log(err);
