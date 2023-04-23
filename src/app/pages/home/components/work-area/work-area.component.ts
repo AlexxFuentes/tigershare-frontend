@@ -1,9 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { faUser, faCloud, faCode, faFolder, faFileExport } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faCloud, faCode, faFolder, faFileExport, faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
 import { ComunicacionService } from 'src/app/services/comunicacion.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProyectosService } from 'src/app/services/proyectos.service';
-import { NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-work-area',
@@ -25,7 +26,8 @@ export class WorkAreaComponent implements OnInit {
   faCloud = faCloud;
   faCode = faCode;
   faFolder = faFolder;
-  faFileExport = faFileExport
+  faFileExport = faFileExport;
+  faFloppyDisk = faFloppyDisk;
   // Code Editor
   codeJS: string = '';
   codeHTML: string = '';
@@ -63,17 +65,17 @@ export class WorkAreaComponent implements OnInit {
     private projectService: ProyectosService,
     private modalService: NgbModal, 
     private router: Router,
+    private activeRoute: ActivatedRoute,
+    private clipboard: Clipboard
   ) { 
-    this.getProjectById(localStorage.getItem('id_project') || '');
+    if(localStorage.getItem('id_project')){
+      this.getProjectById(localStorage.getItem('id_project') || '');
+    }
   }
   
   ngOnInit(): void {
-    // Obtener las variables del localStorage
-    this.codeHTML = localStorage.getItem('codeHTML') || '';
-    this.codeJS = localStorage.getItem('codeJS') || '';
-    this.codeCSS = localStorage.getItem('codeCSS') || '';
     this.comunicacion.actualizar$.subscribe(() => this.open());
-
+    
     this.comunicacion.getDataProject$().subscribe((data) => {
       this.dataProject = data;
       localStorage.setItem('id_project', this.dataProject._id);
@@ -87,6 +89,9 @@ export class WorkAreaComponent implements OnInit {
       if (event instanceof NavigationEnd) {
         if (previousUrl && previousUrl !== event.url) {
           localStorage.removeItem('id_project');
+          localStorage.removeItem('codeHTML');
+          localStorage.removeItem('codeJS');
+          localStorage.removeItem('codeCSS');
         }
         previousUrl = event.url;
       }
@@ -100,6 +105,11 @@ export class WorkAreaComponent implements OnInit {
     localStorage.setItem('codeHTML', this.codeHTML);
     localStorage.setItem('codeJS', this.codeJS);
     localStorage.setItem('codeCSS', this.codeCSS);
+  }
+
+  copyLink() {
+    const link: string = 'http://localhost:4200/home/work-area/' + this.dataProject._id;
+    this.clipboard.copy(link);
   }
 
   getProjectById(id_project: string) {
@@ -117,13 +127,11 @@ export class WorkAreaComponent implements OnInit {
   }
   
   updateProject(id_project: string) {
-    console.log(id_project)
     const dataNewProject ={
       html: localStorage.getItem('codeHTML'),
       js: localStorage.getItem('codeJS'),
       css: localStorage.getItem('codeCSS'),
     }
-    console.log(dataNewProject);
     this.projectService.updateProject(id_project, dataNewProject).subscribe(
       (res) => {
         console.log(res);

@@ -20,7 +20,6 @@ const routes: Routes = [
   {path: 'log-in', component: LogInComponent},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuardService], 
     children: [
-      {path: 'work-area', component: WorkAreaComponent},
       {path: 'work-area/:id', component: WorkAreaComponent},
       {path: 'projects', component: ProjectsComponent},
       {path: 'configurations', component: ConfigurationsComponent},

@@ -6,6 +6,7 @@ import { CreateProjectDto } from 'src/app/models/project.dto';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-projects',
@@ -55,7 +56,6 @@ export class ProjectsComponent implements OnInit{
   getAllsProjects() {
     this.projectService.getAllsProjects(sessionStorage.getItem('token')!).subscribe(
       (res) => {
-        //console.log(res);
         this.allsProjects = res;
       },
       (err) => {
@@ -77,10 +77,8 @@ export class ProjectsComponent implements OnInit{
       sessionStorage.getItem('token') ?? '',
       nombre ?? ''
     );
-    //console.log(dataNewProject);
     this.projectService.createNewProject(dataNewProject).subscribe(
       (res) => {
-        //console.log(res);
         this.getAllsProjects();
       },
       (err) => {
@@ -93,8 +91,18 @@ export class ProjectsComponent implements OnInit{
     this.projectService.getProjectById(id_project).subscribe(
       (res) => {
         this.dataProject = res;
-        console.log(this.dataProject);
         this.comunicacion.sendDataProject(this.dataProject);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  downloadProject(id_project: string) {
+    this.projectService.downloadProject(id_project).subscribe(
+      (res) => {
+        saveAs(res, 'proyecto.zip');
       },
       (err) => {
         console.log(err);
@@ -105,7 +113,6 @@ export class ProjectsComponent implements OnInit{
   deleteProject(id: string) {
     this.projectService.deleteProject(id).subscribe(
       (res) => {
-        //console.log(res);
         this.getAllsProjects();
       },
       (err) => {

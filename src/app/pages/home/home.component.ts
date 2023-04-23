@@ -33,6 +33,7 @@ export class HomeComponent {
     localStorage.setItem('codeHTML', '');
     localStorage.setItem('codeJS', '');
     localStorage.setItem('codeCSS', '');
+    localStorage.removeItem('id_project');
   }
 
   abrirNavLateral() {

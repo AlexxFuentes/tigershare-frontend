@@ -9,7 +9,7 @@
                     <h1 class="mx-3">{{dataProject?.nombre}}</h1>
                 </div>
                 <div class="d-flex mb-3">
-                    <button class="m-1 text-white bg-transparent">
+                    <button class="btn m-1 text-white bg-transparent" (click)="copyLink()">
                         <fa-icon [icon]="faCode" class="mx-1 pt-1" style="color: #7741BD;"></fa-icon>
                         Copiar enlace
                     </button>
@@ -23,18 +23,22 @@
                         <br>
                         <small>Última modificación: {{dataProject?.u_mod}}</small>
                     </p>
-                    <button class="bg-transparent" (click)="updateProject(dataProject?._id)">
-                        <fa-icon [icon]="faFileExport" class="mx-1 pt-1" style="color: #7741BD;"></fa-icon>
-                    </button>
                 </div>
                 <!--Colaboradores-->
-                <!-- <div class="d-flex" *ngIf="dataProject?.colaboradores.length">
+                <div class="d-flex" *ngIf="dataProject?.colaboradores?.length">
                     <h6 class="mx-1">Colaboradores</h6>
-                    <fa-icon *ngFor="let n of getRange(dataProject?.colaboradores.length)" 
+                    <fa-icon *ngFor="let n of getRange(dataProject?.colaboradores?.length)" 
                     [icon]="faCloud" class="mx-1" style="color: #7741BD;"></fa-icon>
-                </div> -->
+                </div>
                 <!--Fin Colaboradores-->
             </div><!--FIN Creado por y colaboradores-->
+
+            <div class="py-3">
+                <button class="btn bg-transparent" (click)="updateProject(dataProject?._id)">
+                    <fa-icon [icon]="faFloppyDisk" class="mx-1 pt-1" style="color: #7741BD;"></fa-icon>
+                    Guardar cambios
+                </button>
+            </div>
         </div>
 
         <div class="container-grid">

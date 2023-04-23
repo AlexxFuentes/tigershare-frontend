@@ -15,7 +15,7 @@
                             </div>
                             <div class="d-flex justify-content-between mt-3">
                                 <small>Ultima modificacion hace: {{project.u_mod}}</small>
-                                <button class="btn">
+                                <button class="btn" (click)="downloadProject(project._id)">
                                     <fa-icon [icon]="faDownload" class="icon"></fa-icon>
                                 </button>
                                 <button class="btn" (click)="openProject(project._id)">

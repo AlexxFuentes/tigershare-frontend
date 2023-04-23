@@ -32,4 +32,8 @@ export class ProyectosService {
     const nuevaRaiz = newData;
     return this.httpClient.put(`${this.api}/proyecto/actualizar/${id_project}`, nuevaRaiz);
   }
+
+  downloadProject(id_project: string): Observable<any> {
+    return this.httpClient.get(`${this.api}/proyecto/descargar/${id_project}`, { responseType: 'blob' });
+  }
 }

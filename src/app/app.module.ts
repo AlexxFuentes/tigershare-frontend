@@ -21,6 +21,7 @@ import { ProjectsComponent } from './pages/home/components/projects/projects.com
 import { SnippetsComponent } from './pages/home/components/snippets/snippets.component';
 import { ConfigurationsComponent } from './pages/home/components/configurations/configurations.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { HomeComponent } from './pages/home/home.component';
     FormsModule,
     ReactiveFormsModule,
     MonacoEditorModule.forRoot(),
+    ClipboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
