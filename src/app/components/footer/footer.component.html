@@ -3,7 +3,8 @@
     router.url !== '/home/projects' &&
     router.url !== '/home/configurations' &&
     router.url !== '/home/snippets' &&
-    router.url !== '/home/work-area'">
+    router.url !== '/home/work-area' &&
+    !router.url.match('/home/work-area/*')">
     <div class="d-flex justify-content-around align-items-center">
         <div>
             <h6>Contactanos</h6>

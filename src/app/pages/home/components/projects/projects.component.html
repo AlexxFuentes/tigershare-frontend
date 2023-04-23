@@ -2,6 +2,9 @@
     <div class="container-fluid">
         <div class="row d-flex justify-content-center">
             <h1 style="color: #fff; text-align: center;">Área de proyectos</h1>
+            <div class="col-11 py-2">
+                <button class="btn" (click)="openModal(modalNewProject)">Crear nuevo proyecto</button>
+            </div>
             <div  class="col-12 col-lg-11 col-xl-11 col-md-11 col-sm-11 scroll-area scroll overflow-auto">
                 <div class="contenedor-grip">
                     <div class="card" *ngFor="let project of allsProjects">
@@ -12,7 +15,15 @@
                             </div>
                             <div class="d-flex justify-content-between mt-3">
                                 <small>Ultima modificacion hace: {{project.u_mod}}</small>
-                                <fa-icon [icon]="faSquareArrowUpRight" class="icon"></fa-icon>
+                                <button class="btn">
+                                    <fa-icon [icon]="faDownload" class="icon"></fa-icon>
+                                </button>
+                                <button class="btn" (click)="openProject(project._id)">
+                                    <fa-icon [icon]="faSquareArrowUpRight" class="icon"></fa-icon>
+                                </button>
+                                <button class="btn" (click)="deleteProject(project?._id)">
+                                    <fa-icon [icon]="faTrashCan" class="icon"></fa-icon>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -21,3 +32,28 @@
         </div>
     </div>
 </section>
+
+<ng-template #modalNewProject let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Nuevo proyecto</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<form [formGroup]="formularioNewProject">
+			<div class="mb-3">
+                <label for="new-project" class="form-label">Nombre del nuevo proyecto</label>
+                <input 
+                formControlName="nombre"
+                [ngClass]="{'input-error': nombre?.invalid && nombre?.touched}"
+                name="nombre"
+                type="text" class="form-control" id="new-project">
+            </div>
+            <div *ngIf="nombre?.invalid && (nombre?.dirty || nombre?.touched)" class="error">
+                <span *ngIf="nombre?.errors?.['required']">El nombre del proyecto es obligatorio</span>
+            </div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="" (click)="createNewProject()">Guardar</button>
+	</div>
+</ng-template>

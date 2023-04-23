@@ -1,11 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { faUser, faCloud, faCode, faFolder } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faCloud, faCode, faFolder, faFileExport } from '@fortawesome/free-solid-svg-icons';
 import { ComunicacionService } from 'src/app/services/comunicacion.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProyectosService } from 'src/app/services/proyectos.service';
-import { CreateProjectDto } from 'src/app/models/project.dto';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Token } from 'monaco-editor';
 
 @Component({
   selector: 'app-work-area',
@@ -17,17 +14,9 @@ export class WorkAreaComponent implements OnInit {
   @ViewChild('html') editorHtml: ElementRef | undefined;
   @ViewChild('css') editorCss: ElementRef | undefined;
   @ViewChild('js') editorJs: ElementRef | undefined;
-  newProject: any = {}
-  projectDatails: boolean = false;
+  @ViewChild('modalSaveChanges') modalSaveChanges: any;
+  dataProject: any = {};
   
-  formularioNewProject = new FormGroup({
-    nombre: new FormControl('', [Validators.required, Validators.maxLength(35)]),
-  });
-
-  get nombre() {
-    return this.formularioNewProject.get('nombre');
-  }
-
   // variables
   interruptor: boolean = false;
   // Font Awesome
@@ -35,6 +24,7 @@ export class WorkAreaComponent implements OnInit {
   faCloud = faCloud;
   faCode = faCode;
   faFolder = faFolder;
+  faFileExport = faFileExport
   // Code Editor
   codeJS: string = '';
   codeHTML: string = '';
@@ -70,8 +60,10 @@ export class WorkAreaComponent implements OnInit {
   constructor(
     private comunicacion: ComunicacionService, 
     private projectService: ProyectosService,
-    private modalService: NgbModal
-  ) {}
+    private modalService: NgbModal, 
+  ) { 
+    this.getProjectById(localStorage.getItem('id_project') || '');
+  }
   
   ngOnInit(): void {
     // Obtener las variables del localStorage
@@ -79,17 +71,65 @@ export class WorkAreaComponent implements OnInit {
     this.codeJS = localStorage.getItem('codeJS') || '';
     this.codeCSS = localStorage.getItem('codeCSS') || '';
     this.comunicacion.actualizar$.subscribe(() => this.open());
+
+    this.comunicacion.getDataProject$().subscribe((data) => {
+      this.dataProject = data;
+      localStorage.setItem('id_project', this.dataProject._id);
+      this.codeCSS = data.css;
+      this.codeHTML = data.html;
+      this.codeJS = data.js;
+    });
   }
   
   onCodeChange() {
     const htmlForPreview = this.createHtml(this.codeHTML, this.codeJS, this.codeCSS);
     this.iframeResult?.nativeElement.setAttribute('srcdoc', htmlForPreview);
-
+    //this.haveChanges = true;
     // Guardar las variables en el localStorage
     localStorage.setItem('codeHTML', this.codeHTML);
     localStorage.setItem('codeJS', this.codeJS);
     localStorage.setItem('codeCSS', this.codeCSS);
   }
+
+  getProjectById(id_project: string) {
+    this.projectService.getProjectById(id_project).subscribe(
+      (res) => {
+        this.dataProject = res;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+  
+  updateProject(id_project: string) {
+    console.log(id_project)
+    const dataNewProject ={
+      html: localStorage.getItem('codeHTML'),
+      js: localStorage.getItem('codeJS'),
+      css: localStorage.getItem('codeCSS'),
+    }
+    console.log(dataNewProject);
+    // this.projectService.updateProject(this.newProject._id, dataNewProject).subscribe(
+    //   (res) => {
+    //     console.log(res);
+    //     this.newProject = res;
+    //     this.projectDatails = true;
+    //     this.router.navigate(['/home/work-area', this.newProject._id]);
+    //   },
+    //   (err) => {
+    //     console.log(err);
+    //   }
+    // );
+  }
+
+  saveChanges() {
+    // Guardar cambios en el proyecto
+    console.log('Guardando cambios');
+    //this.haveChanges = false;
+    this.modalService.dismissAll();
+  }
+  
 
   createHtml(html: string, js: string, css: string) {
     return `
@@ -114,29 +154,9 @@ export class WorkAreaComponent implements OnInit {
     this.interruptor = !this.interruptor;
   }
 
-  openModalNuevoProyecto(content: any) {
+  openModal(content: any) {
 		this.modalService.open(content, { centered: true, ariaLabelledBy: 'modal-basic-title'});
 	}
-
-  createNewProject() {
-    this.modalService.dismissAll();
-    const { nombre } = this.formularioNewProject.value;
-    const dataNewProject = new CreateProjectDto(
-      sessionStorage.getItem('token') ?? '',
-      nombre ?? ''
-    );
-    console.log(dataNewProject);
-    this.projectService.createNewProject(dataNewProject).subscribe(
-      (res) => {
-        console.log(res);
-        this.newProject = res;
-        this.projectDatails = true;
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-  }
 
   getRange(n: number): number[] {
     return Array.from({length: n}, (_, i) => i + 1);

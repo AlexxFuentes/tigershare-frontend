@@ -12,11 +12,23 @@ export class ProyectosService {
 
   constructor(private httpClient:HttpClient) { }
 
+  getAllsProjects(token: string):Observable<any> {
+    return this.httpClient.get(`${this.api}/proyecto/listar/${token}`);
+  }
+
+  getProjectById(id_project: string):Observable<any> {
+    return this.httpClient.get(`${this.api}/proyecto/obtener/${id_project}`);
+  }
+
   createNewProject(newProject: CreateProjectDto):Observable<any> {
     return this.httpClient.post(`${this.api}/proyecto/crear`, newProject);
   }
 
-  getAllsProjects(token: string):Observable<any> {
-    return this.httpClient.get(`${this.api}/proyecto/listar/${token}`);
+  deleteProject(id: string):Observable<any> {
+    return this.httpClient.delete(`${this.api}/proyecto/borrar/${id}`);
+  }
+
+  updateProject(id_project: string, newData: any): Observable<any> {
+    return this.httpClient.put(`${this.api}/proyecto/actualizar/${id_project}`, newData);
   }
 }
