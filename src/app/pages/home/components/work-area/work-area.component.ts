@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProyectosService } from 'src/app/services/proyectos.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Clipboard } from '@angular/cdk/clipboard';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-work-area',
@@ -66,7 +67,8 @@ export class WorkAreaComponent implements OnInit {
     private modalService: NgbModal, 
     private router: Router,
     private activeRoute: ActivatedRoute,
-    private clipboard: Clipboard
+    private clipboard: Clipboard,
+    private toastr: ToastrService,
   ) { 
     if(localStorage.getItem('id_project')){
       this.getProjectById(localStorage.getItem('id_project') || '');
@@ -116,12 +118,6 @@ export class WorkAreaComponent implements OnInit {
   getProjectById(id_project: string) {
     this.projectService.getProjectById(id_project).subscribe(
       (data) => {
-        // this.dataProject = data;
-        // localStorage.setItem('id_project', this.dataProject._id);
-        // this.codeCSS = data.raiz.css;
-        // this.codeHTML = data.raiz.html;
-        // this.codeJS = data.raiz.js;
-
         this.dataProject = data;
         console.log(this.dataProject);
         localStorage.setItem('id_project', this.dataProject._id);
@@ -144,6 +140,7 @@ export class WorkAreaComponent implements OnInit {
     }
     this.projectService.updateProject(id_project, dataNewProject).subscribe(
       (res) => {
+        this.showSaveChanges();
         console.log(res);
       },
       (err) => {
@@ -154,10 +151,8 @@ export class WorkAreaComponent implements OnInit {
 
   saveChanges() {
     console.log('Guardando cambios');
-    //this.haveChanges = false;
     this.modalService.dismissAll();
   }
-  
 
   createHtml(html: string, js: string, css: string) {
     return `
@@ -188,5 +183,10 @@ export class WorkAreaComponent implements OnInit {
 
   getRange(n: number): number[] {
     return Array.from({length: n}, (_, i) => i + 1);
+  }
+
+  // show: Guardar cambios
+  showSaveChanges() {
+    this.toastr.success('Guardar cambios', 'Guardar cambios');
   }
 }

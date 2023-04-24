@@ -7,6 +7,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { saveAs } from 'file-saver';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-projects',
@@ -25,7 +27,7 @@ export class ProjectsComponent implements OnInit{
   dataProject: any = {};
 
   // Formulario nuevo proyecto
-    formularioNewProject = new FormGroup({
+  formularioNewProject = new FormGroup({
     nombre: new FormControl('', [Validators.required, Validators.maxLength(35)]),
   });
 
@@ -38,6 +40,7 @@ export class ProjectsComponent implements OnInit{
     private projectService: ProyectosService,
     private modalService: NgbModal,
     private router: Router,
+    private toastr: ToastrService,
   ) {}
 
   ngOnInit(): void {
@@ -81,9 +84,11 @@ export class ProjectsComponent implements OnInit{
     this.projectService.createNewProject(dataNewProject).subscribe(
       (res) => {
         this.getAllsProjects();
+        this.showSuccess();
       },
       (err) => {
         console.log(err);
+        this.showError();
       }
     );
   }
@@ -112,6 +117,7 @@ export class ProjectsComponent implements OnInit{
   }
 
   deleteProject(id: string) {
+    this.showDeleteProject(id);
     this.projectService.deleteProject(id).subscribe(
       (res) => {
         this.getAllsProjects();
@@ -120,5 +126,33 @@ export class ProjectsComponent implements OnInit{
         console.log(err);
       }
     );
+  }
+
+  showSuccess() {
+    this.toastr.success('', 'proyecto creado');
+  }
+
+  showError() {
+    this.toastr.error('', 'error al crear el proyecto');
+  }
+  
+  // show eliminar proyecto
+  showDeleteProject(id: string) {
+    this.toastr.warning('', 'Eliminando proyecto', {
+      timeOut: 1000,
+      extendedTimeOut: 1000,
+      positionClass: 'toast-top-center',
+      closeButton: true,
+      progressBar: true,
+      progressAnimation: 'increasing',
+      tapToDismiss: true,
+      onActivateTick: true,
+      enableHtml: true,
+      toastClass: 'ngx-toastr',
+      titleClass: 'toast-title',
+      messageClass: 'toast-message',
+      easing: 'ease-in',
+      easeTime: 300,
+    }).onTap.subscribe(() => this.deleteProject(id));
   }
 }

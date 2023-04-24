@@ -22,6 +22,8 @@ import { SnippetsComponent } from './pages/home/components/snippets/snippets.com
 import { ConfigurationsComponent } from './pages/home/components/configurations/configurations.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,7 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
     SignUpComponent,
     WorkAreaComponent,
     NotFoundComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,9 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
     FormsModule,
     ReactiveFormsModule,
     MonacoEditorModule.forRoot(),
-    ClipboardModule
+    ClipboardModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
