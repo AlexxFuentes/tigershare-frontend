@@ -4,7 +4,7 @@
             <div class="col-10" style="color: #fff;">
 
                 <div class="col-12 d-flex justify-content-between pt-4 pb-3">
-                    <h3>Bienvenido, Jose Ramos</h3>
+                    <h3>Bienvenido, {{infoUser.nombre}} {{infoUser.apellido}}</h3>
                     <img src="../../assets/img/male_avatar_.svg" alt="" width="50px" height="50px">
                 </div>
 
@@ -14,10 +14,10 @@
                     <img src="../../assets/img/male_avatar_.svg" alt="" width="50px" height="50px">
                     <div class="px-5">
                         <div class="d-flex align-items-center">
-                            <strong>Jose Ramos</strong>
+                            <strong>{{infoUser.user}}</strong>
                             <button class="btn"><fa-icon [icon]="faPenToSquare" class="icon"></fa-icon></button>
                         </div>
-                        <small>correo.correo@gmail.com</small>
+                        <small>{{infoUser.email}}</small>
                     </div>
                 </div>
 

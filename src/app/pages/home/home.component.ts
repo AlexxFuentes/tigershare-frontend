@@ -22,7 +22,7 @@ export class HomeComponent {
   constructor(
     private router: Router, 
     private authService: AuthService,
-    private comunication: ComunicacionService
+    private comunication: ComunicacionService, 
   ) {}
 
   ngOnInit(): void {}

@@ -21,6 +21,15 @@ export class UsuariosService {
   getAllsUsers():Observable<any> {
     return this.httpClient.get(`${this.api}/usr`,{});
   }
+
+  /**
+   * Obtiene la informacion de un usuario por su token
+   * @param token 
+   * @returns info user
+   */
+  getInfoUser(token: string):Observable<any> {
+    return this.httpClient.get(`${this.api}/usr/${token}`);
+  }
   
   /**
    * Permite iniciar sesion
