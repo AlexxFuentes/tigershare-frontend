@@ -113,6 +113,7 @@ export class WorkAreaComponent implements OnInit {
   copyLink() {
     const link: string = 'http://localhost:4200/home/work-area/' + this.dataProject._id;
     this.clipboard.copy(link);
+    this.toastr.success('Link copiado al portapapeles', 'Copiado', {});
   }
 
   getProjectById(id_project: string) {
@@ -187,6 +188,6 @@ export class WorkAreaComponent implements OnInit {
 
   // show: Guardar cambios
   showSaveChanges() {
-    this.toastr.success('Guardar cambios', 'Guardar cambios');
+    this.toastr.success('', 'Guardar cambios');
   }
 }
