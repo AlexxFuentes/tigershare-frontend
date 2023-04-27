@@ -51,4 +51,17 @@ export class LogInComponent {
     }
   }
 
+  iniciarSesionFacebook() {
+    this.usrService.singInFacebook().subscribe(
+      (data) => {
+        console.log(data);
+        this.authService.token = data.token;
+        this.router.navigate(['home/general-information']);
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+  }
+
 }

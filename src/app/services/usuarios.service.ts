@@ -10,7 +10,7 @@ import { CreateLoginDto } from '../models/login.dto'
 export class UsuariosService {
   //api: string = 'http://20.239.195.88:3000';
   //api: string = 'http://localhost:3000';
-  api: string = 'https://tigershare.eastasia.cloudapp.azure.com/';
+  api: string = 'https://tigershare.eastasia.cloudapp.azure.com';
 
   constructor(private httpClient:HttpClient) { }
 
@@ -32,9 +32,17 @@ export class UsuariosService {
   }
 
   /**
+   * Inicia sesion con facebook
+   * @returns token
+   */
+  singInFacebook():Observable<any> {
+    return this.httpClient.get(`${this.api}/usr/facebook`);
+  }
+
+  /**
    * Permite registrar un usuario
    * @param user 
-   * @returns 
+   * @returns token
    */
   singUp(user: CreateUserDto):Observable<any> {
     return this.httpClient.post(`${this.api}/usr/registrar`, user);
