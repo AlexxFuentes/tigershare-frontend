@@ -105,10 +105,10 @@ export class ProjectsComponent implements OnInit{
     );
   }
 
-  downloadProject(id_project: string) {
+  downloadProject(id_project: string, name_project: string) {
     this.projectService.downloadProject(id_project).subscribe(
       (res) => {
-        saveAs(res, 'proyecto.zip');
+        saveAs(res, `${name_project}.zip`);
       },
       (err) => {
         console.log(err);

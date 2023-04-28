@@ -21,6 +21,10 @@ export class ProyectosService {
     return this.httpClient.get(`${this.api}/proyecto/obtener/${id_project}`);
   }
 
+  getLastsProjects(token: string):Observable<any> {
+    return this.httpClient.get(`${this.api}/proyecto/top/${token}`);
+  }
+
   createNewProject(newProject: CreateProjectDto):Observable<any> {
     return this.httpClient.post(`${this.api}/proyecto/crear`, newProject);
   }
