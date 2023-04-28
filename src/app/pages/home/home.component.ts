@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { faUserGear, faCode, faFolder, faGear, faFileCode } from '@fortawesome/free-solid-svg-icons';
+import { faUserGear, faCode, faFolder, faGear, faFileCode, faFolderTree } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { ComunicacionService } from 'src/app/services/comunicacion.service';
@@ -18,6 +18,7 @@ export class HomeComponent {
   faFolder = faFolder;
   faGear = faGear;
   faFileCode = faFileCode;
+  faFolderTree = faFolderTree;
 
   constructor(
     private router: Router, 

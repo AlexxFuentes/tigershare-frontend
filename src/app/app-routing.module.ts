@@ -12,6 +12,7 @@ import { ConfigurationsComponent } from './pages/home/components/configurations/
 import { SnippetsComponent } from './pages/home/components/snippets/snippets.component';
 import { DashboardMainComponent } from './pages/home/components/dashboard-main/dashboard-main.component';
 import { HomeComponent } from './pages/home/home.component';
+import { CollaborationsComponent } from './pages/home/components/collaborations/collaborations.component';
 
 const routes: Routes = [
   {path: '', component: LandingPageComponent},
@@ -24,9 +25,11 @@ const routes: Routes = [
       {path: 'projects', component: ProjectsComponent},
       {path: 'configurations', component: ConfigurationsComponent},
       {path: 'snippets', component: SnippetsComponent},
-      {path: 'general-information', component: DashboardMainComponent}
+      {path: 'general-information', component: DashboardMainComponent},
+      {path: 'collaborations', component: CollaborationsComponent}
     ]
   },
+  {path: 'work-area-publica/:id', component: WorkAreaComponent},
   {path: '**', component: NotFoundComponent}
 ];
 

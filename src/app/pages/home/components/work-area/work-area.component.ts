@@ -1,11 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { faUser, faCloud, faCode, faFolder, faFileExport, faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faCloud, faCode, faFolder, faFileExport, faFloppyDisk, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { ComunicacionService } from 'src/app/services/comunicacion.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProyectosService } from 'src/app/services/proyectos.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { ToastrService } from 'ngx-toastr';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-work-area',
@@ -29,6 +30,7 @@ export class WorkAreaComponent implements OnInit {
   faFolder = faFolder;
   faFileExport = faFileExport;
   faFloppyDisk = faFloppyDisk;
+  faUserPlus = faUserPlus;
   // Code Editor
   codeJS: string = '';
   codeHTML: string = '';
@@ -61,6 +63,15 @@ export class WorkAreaComponent implements OnInit {
     ...this.optionsEditor
   };
 
+  // Formulario nuevo colaborador
+  formCollaborator = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.maxLength(35), Validators.pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")]),
+  });
+  
+  get email() {
+    return this.formCollaborator.get('email');
+  }
+
   constructor(
     private comunicacion: ComunicacionService, 
     private projectService: ProyectosService,
@@ -77,6 +88,7 @@ export class WorkAreaComponent implements OnInit {
   
   ngOnInit(): void {
     this.comunicacion.actualizar$.subscribe(() => this.open());
+    this.onCodeChange();
     
     this.comunicacion.getDataProject$().subscribe((data) => {
       this.dataProject = data;
@@ -111,16 +123,20 @@ export class WorkAreaComponent implements OnInit {
   }
 
   copyLink() {
-    const link: string = 'http://localhost:4200/home/work-area/' + this.dataProject._id;
+    const link: string = 'http://localhost:4200/work-area-publica/' + this.dataProject._id;
     this.clipboard.copy(link);
     this.toastr.success('Link copiado al portapapeles', 'Copiado', {});
   }
 
   getProjectById(id_project: string) {
+    if(!this.router.url.match('/home/work-area/*')){
+      this.interruptor = true;
+    }
+    // esta ruta es: work-area-publica/:id_project
     this.projectService.getProjectById(id_project).subscribe(
       (data) => {
         this.dataProject = data;
-        console.log(this.dataProject);
+        // console.log(this.dataProject);
         localStorage.setItem('id_project', this.dataProject._id);
         this.codeCSS = data.raiz.css;
         this.codeHTML = data.raiz.html;
@@ -143,6 +159,20 @@ export class WorkAreaComponent implements OnInit {
       (res) => {
         this.showSaveChanges();
         console.log(res);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  addCollaborator() {
+    this.projectService.addCollaborator(this.dataProject._id, this.formCollaborator.value.email ?? '').subscribe(
+      (res) => {
+        console.log(res);
+        this.getProjectById(this.dataProject._id);
+        this.toastr.success('Colaborador añadido', 'Añadido', {});
+        this.modalService.dismissAll();
       },
       (err) => {
         console.log(err);

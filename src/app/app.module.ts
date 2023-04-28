@@ -24,6 +24,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { CollaborationsComponent } from './pages/home/components/collaborations/collaborations.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ToastrModule } from 'ngx-toastr';
     WorkAreaComponent,
     NotFoundComponent,
     HomeComponent,
+    CollaborationsComponent,
   ],
   imports: [
     BrowserModule,

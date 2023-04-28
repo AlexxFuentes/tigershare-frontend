@@ -1,6 +1,5 @@
 <section class="pt-5 pb-5" [ngClass]="{'active-cont': !interruptor}">
     <div class="container-fluid" style="color: #FFF;">
-
         <div class="pt-4 px-4 w-100" *ngIf="dataProject">
             <!--Descripcion del proyecto y enlace-->
             <div class="d-grid d-xxl-flex d-xl-flex d-lg-flex d-md-flex justify-content-between align-items-center">
@@ -25,10 +24,15 @@
                     </p>
                 </div>
                 <!--Colaboradores-->
-                <div class="d-flex" *ngIf="dataProject?.colaboradores?.length">
-                    <h6 class="mx-1">Colaboradores</h6>
-                    <fa-icon *ngFor="let n of getRange(dataProject?.colaboradores?.length)" 
-                    [icon]="faCloud" class="mx-1" style="color: #7741BD;"></fa-icon>
+                <div class="d-flex justify-content-center align-items-center">
+                    <button class="btn bg-transparent" (click)="openModal(modalAddCollaborator)">
+                        <fa-icon [icon]="faUserPlus" class="mx-1 pt-1" style="color: #7741BD;"></fa-icon>
+                    </button>
+                    <h6 class="mx-1 pb-0 mb-0">Colaboradores:</h6>
+                    <div  *ngIf="dataProject?.colaboradores?.length">
+                        <fa-icon *ngFor="let n of getRange(dataProject?.colaboradores?.length)" 
+                        [icon]="faUser" class="mx-1" style="color: #7741BD;"></fa-icon>
+                    </div>
                 </div>
                 <!--Fin Colaboradores-->
             </div><!--FIN Creado por y colaboradores-->
@@ -66,6 +70,31 @@
     </div>
 </section>
 
+<ng-template #modalAddCollaborator let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Nuevo colaborador</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<form [formGroup]="formCollaborator">
+            <div class="mb-3">
+                <label for="emailInput" class="col-form-label">Correo electrónico:</label>
+                <input 
+                formControlName="email"
+                [ngClass]="{'input-error': email?.invalid && (email?.dirty || email?.touched)}"
+                type="email" name="email" class="form-control" id="emailInput" 
+                placeholder="desarrollador@gmail.com" required>
+            </div>
+            <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="error">
+                <span *ngIf="email?.errors?.['required']">El correo electrónico es obligatorio.</span>
+                <span *ngIf="email?.errors?.['pattern']">El correo electrónico que ingreso es invalido.</span>
+            </div>
+        </form>
+	</div>
+	<div class="modal-footer">
+		<button [disabled]="!formCollaborator.valid" type="button" class="btn" (click)="addCollaborator()">Guardar colaborador</button>
+	</div>
+</ng-template>
 
 <ng-template #modalSaveChanges let-modal>
 	<div class="modal-header">
