@@ -29,6 +29,7 @@ export class CollaborationsComponent implements OnInit {
 
   ngOnInit(): void {
     this.comunicacion.actualizar$.subscribe(() => this.open());
+    this.getAllsProjects();
   }
 
   getAllsProjects() {
