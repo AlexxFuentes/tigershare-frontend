@@ -8,7 +8,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { saveAs } from 'file-saver';
 import { ToastrService } from 'ngx-toastr';
-
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-projects',
@@ -154,5 +154,11 @@ export class ProjectsComponent implements OnInit{
       easing: 'ease-in',
       easeTime: 300,
     }).onTap.subscribe(() => this.deleteProject(id));
+  }
+
+
+  showDateString(u_mod:any){
+    moment.locale('es');
+    return moment(u_mod,'YYYYMMDD').fromNow();
   }
 }

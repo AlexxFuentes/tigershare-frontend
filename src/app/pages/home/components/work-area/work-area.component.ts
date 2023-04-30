@@ -7,6 +7,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { ToastrService } from 'ngx-toastr';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-work-area',
@@ -219,5 +220,10 @@ export class WorkAreaComponent implements OnInit {
   // show: Guardar cambios
   showSaveChanges() {
     this.toastr.success('', 'Guardar cambios');
+  }
+
+  showDateString(u_mod:any){
+    moment.locale('es');
+    return moment(u_mod,'YYYYMMDD').fromNow();
   }
 }
