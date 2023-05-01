@@ -155,8 +155,7 @@ export class ProjectsComponent implements OnInit{
       easeTime: 300,
     }).onTap.subscribe(() => this.deleteProject(id));
   }
-
-
+  
   showDateString(u_mod:any){
     moment.locale('es');
     return moment(u_mod,'YYYYMMDD').fromNow();
