@@ -4,6 +4,7 @@ import { faCrown, faSquareArrowUpRight, faFolderClosed } from '@fortawesome/free
 import { ComunicacionService } from 'src/app/services/comunicacion.service';
 import { ProyectosService } from 'src/app/services/proyectos.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-dashboard-main',
@@ -78,5 +79,10 @@ export class DashboardMainComponent implements OnInit {
 
   open() {
     this.interruptor = !this.interruptor;
+  }
+
+  showDateString(u_mod:any){
+    moment.locale('es');
+    return moment(u_mod,'YYYYMMDD').fromNow();
   }
 }

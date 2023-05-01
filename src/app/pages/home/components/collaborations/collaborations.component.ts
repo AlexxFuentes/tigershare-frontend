@@ -4,6 +4,7 @@ import { faSquareArrowUpRight, faFolderClosed, faTrashCan, faDownload } from '@f
 import { Router } from '@angular/router';
 import { ProyectosService } from 'src/app/services/proyectos.service';
 import { saveAs } from 'file-saver';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-collaborations',
@@ -74,5 +75,10 @@ export class CollaborationsComponent implements OnInit {
 
   open() {
     this.interruptor = !this.interruptor;
+  }
+
+  showDateString(u_mod:any){
+    moment.locale('es');
+    return moment(u_mod,'YYYYMMDD').fromNow();
   }
 }

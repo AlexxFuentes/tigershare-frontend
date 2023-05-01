@@ -11,7 +11,7 @@
                                 <strong>{{project.nombre}}</strong>
                             </div>
                             <div class="d-flex justify-content-between mt-3">
-                                <small>Ultima modificacion hace: {{project.u_mod}}</small>
+                                <small>Ultima modificacion {{showDateString(project.u_mod)}}</small>
                                 <button class="btn" (click)="downloadProject(project._id, project.nombre)">
                                     <fa-icon [icon]="faDownload" class="icon"></fa-icon>
                                 </button>
