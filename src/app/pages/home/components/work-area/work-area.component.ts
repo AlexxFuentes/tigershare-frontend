@@ -48,7 +48,7 @@ export class WorkAreaComponent implements OnInit {
     },
     lineNumbers: 'on', //off
     minimap: {
-      enabled: false //true
+      enabled: true //true
     }
   }
   optionsEditorCss = {

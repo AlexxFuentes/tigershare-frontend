@@ -15,7 +15,7 @@ import { PricesComponent } from './pages/prices/prices.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { WorkAreaComponent } from './pages/home/components/work-area/work-area.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { MonacoEditorModule } from 'ngx-monaco-editor-v2'
+import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
 import { DashboardMainComponent } from './pages/home/components/dashboard-main/dashboard-main.component';
 import { ProjectsComponent } from './pages/home/components/projects/projects.component';
 import { SnippetsComponent } from './pages/home/components/snippets/snippets.component';

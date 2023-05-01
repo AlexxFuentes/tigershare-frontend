@@ -5,6 +5,12 @@
     --color3: #7741BD;
 }
 
+.grafica {
+    width: 300px;
+    height: 350px;
+    margin: 0 auto;
+}
+
 .areaUsuario{
     grid-area: area-user;
     padding-left: 60px;

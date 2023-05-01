@@ -30,6 +30,7 @@ const routes: Routes = [
     ]
   },
   {path: 'work-area-publica/:id', component: WorkAreaComponent},
+  {path: 'work-area-publica', component: WorkAreaComponent},
   {path: '**', component: NotFoundComponent}
 ];
 
