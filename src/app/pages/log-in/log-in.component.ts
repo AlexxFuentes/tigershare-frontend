@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CreateLoginDto } from 'src/app/models/login.dto';
+import { SocialAuthService, SocialUser } from "@abacritt/angularx-social-login";
+import { FacebookLoginProvider } from "@abacritt/angularx-social-login";
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,7 +14,10 @@ import { Router } from '@angular/router';
   templateUrl: './log-in.component.html',
   styleUrls: ['./log-in.component.css']
 })
-export class LogInComponent {
+export class LogInComponent implements OnInit {
+  // login facebook
+  user: SocialUser | undefined;
+  loggedIn: boolean | undefined;
   // Font Awesome
   faFacebook = faFacebook;
   faLock = faLock;
@@ -24,7 +29,21 @@ export class LogInComponent {
     password: new FormControl('', [Validators.required, Validators.maxLength(25)]),
   });
   
-  constructor(private usrService: UsuariosService, private authService: AuthService, private router: Router) {}
+  constructor(
+    private usrService: UsuariosService, 
+    private authService: AuthService, 
+    private authSocialService: SocialAuthService,
+    private router: Router,
+  ) {}
+
+  ngOnInit(): void {
+    this.authSocialService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = (user != null);
+      console.log(this.user);
+      console.log(this.loggedIn);
+    });
+  }
   
   get email() {
     return this.formularioInicioSesion.get('email');
@@ -51,17 +70,7 @@ export class LogInComponent {
     }
   }
 
-  iniciarSesionFacebook() {
-    this.usrService.singInFacebook().subscribe(
-      (data) => {
-        console.log(data);
-        this.authService.token = data.token;
-        this.router.navigate(['home/general-information']);
-      },
-      (error) => {
-        console.log(error);
-      }
-    )
+  signInWithFB(): void {
+    this.authSocialService.signIn(FacebookLoginProvider.PROVIDER_ID);
   }
-
 }
