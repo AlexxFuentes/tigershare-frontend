@@ -40,8 +40,27 @@ export class LogInComponent implements OnInit {
     this.authSocialService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = (user != null);
-      console.log(this.user);
-      console.log(this.loggedIn);
+
+      if(this.loggedIn) {
+        const newUser = {
+          nombre: this.user.firstName,
+          apellido: this.user.lastName,
+          user: this.user.name,
+          email: this.user.email,
+        }
+        this.usrService.singInFacebook(newUser).subscribe(
+          (token) => {
+            if(token) {
+              this.authService.token = token;
+              this.router.navigate(['home/general-information']);
+            }
+          },
+          (error) => {
+            console.log(error);
+            this.statusCode = error.error.statusCode;
+          }
+        );
+      }
     });
   }
   

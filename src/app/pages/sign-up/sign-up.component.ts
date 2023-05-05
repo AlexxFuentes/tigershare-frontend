@@ -3,6 +3,10 @@ import { FormControl, FormGroup, ValidationErrors, Validators } from '@angular/f
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { CreateUserDto } from 'src/app/models/user.dto';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { SocialAuthService, SocialUser } from "@abacritt/angularx-social-login";
+import { FacebookLoginProvider } from "@abacritt/angularx-social-login";
+import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -10,6 +14,9 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
+  // login facebook
+  userfb: SocialUser | undefined;
+  loggedIn: boolean | undefined;
   // Font Awesome
   faFacebook = faFacebook;
 
@@ -36,23 +43,59 @@ export class SignUpComponent implements OnInit {
     return null;
   }
 
-  constructor(private userService: UsuariosService) {}
+  constructor(
+    private usrService: UsuariosService,
+    private authService: AuthService, 
+    private authSocialService: SocialAuthService,
+    private router: Router,
+  ) {}
   
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authSocialService.authState.subscribe((user) => {
+      this.userfb = user;
+      this.loggedIn = (user != null);
+
+      if(this.loggedIn) {
+        const newUser = {
+          nombre: this.userfb.firstName,
+          apellido: this.userfb.lastName,
+          user: this.userfb.name,
+          email: this.userfb.email,
+        }
+        this.usrService.singInFacebook(newUser).subscribe(
+          (token) => {
+            if(token) {
+              this.authService.token = token;
+              this.router.navigate(['home/general-information']);
+            }
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      }
+    });
+  }
   
   registrarUsuario(){
     if(this.formularioRegistrarUsuario.valid){
       const { nombres, apellidos, user, email, password, fechaNacimiento, plan } = this.formularioRegistrarUsuario.value;
       const newUser = new CreateUserDto(nombres ?? '', apellidos ?? '', user ?? '', email ?? '', password ?? '', plan ?? '', new Date(fechaNacimiento ?? ''));
-      this.userService.singUp(newUser).subscribe(
+      this.usrService.singUp(newUser).subscribe(
         (token) => {
           console.log(token);
+          this.authService.token = token;
+          this.router.navigate(['home/general-information']);
         },
         (error) => {
           console.log(error);
         }
       );
     }
+  }
+
+  signInWithFB(): void {
+    this.authSocialService.signIn(FacebookLoginProvider.PROVIDER_ID);
   }
 
   get nombres() {

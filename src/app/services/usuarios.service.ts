@@ -44,8 +44,8 @@ export class UsuariosService {
    * Inicia sesion con facebook
    * @returns token
    */
-  singInFacebook():Observable<any> {
-    return this.httpClient.get(`${this.api}/usr/facebook`);
+  singInFacebook(user: any):Observable<any> {
+    return this.httpClient.post(`${this.api}/usr/facebook`, user);
   }
 
   /**

@@ -24,6 +24,7 @@ export class WorkAreaComponent implements OnInit {
   
   // variables
   interruptor: boolean = false;
+  interruptor2: boolean = true;
   // Font Awesome
   faUser = faUser;
   faCloud = faCloud;
@@ -112,6 +113,11 @@ export class WorkAreaComponent implements OnInit {
         previousUrl = event.url;
       }
     });
+
+    if(this.router.url === '/work-area-publica') {
+      this.interruptor = true;
+      this.interruptor2 = false;
+    }
   }
   
   onCodeChange() {
@@ -124,7 +130,8 @@ export class WorkAreaComponent implements OnInit {
   }
 
   copyLink() {
-    const link: string = 'http://localhost:4200/work-area-publica/' + this.dataProject._id;
+    const link: string = 'https://tigershare.vercel.app//work-area-publica/' + this.dataProject._id;
+    //const link: string = 'http://localhost:4200/work-area-publica/' + this.dataProject._id;
     this.clipboard.copy(link);
     this.toastr.success('Link copiado al portapapeles', 'Copiado', {});
   }
