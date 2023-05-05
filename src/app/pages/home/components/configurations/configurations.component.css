@@ -22,6 +22,21 @@
     border-color: var(--color3);
 }
 
+.input-error{
+    border: 3px solid var(--color3);
+}
+
+.error{
+    text-align: center;
+    background-color: var(--color0);
+    border: 1px solid var(--color0);
+    color: var(--color3);
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    font-size: 1rem;
+}
+
 @media only screen and (max-width: 600px) {
     .active-cont {
         margin-left: 0px;

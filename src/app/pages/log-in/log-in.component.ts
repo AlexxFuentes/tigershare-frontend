@@ -49,9 +49,10 @@ export class LogInComponent implements OnInit {
           email: this.user.email,
         }
         this.usrService.singInFacebook(newUser).subscribe(
-          (token) => {
-            if(token) {
-              this.authService.token = token;
+          (data) => {
+            if(data.token) {
+              console.log(data.token);
+              this.authService.token = data.token;
               this.router.navigate(['home/general-information']);
             }
           },

@@ -45,7 +45,7 @@
             </div>
         </div>
 
-        <div class="container-grid">
+        <div class="container-grid pb-5 flex-wrap">
             <div class="item-grid">
                 <label for="htmlTextarea" class="form-label">HTML</label>
                 <ngx-monaco-editor #html class="editor" [options]="optionsEditorHtml" [(ngModel)]="codeHTML"
@@ -63,7 +63,7 @@
             </div>
             <div class="item-grid">
                 <label for="resultCode" class="form-label">Resultado</label>
-                <iframe #resultCode srcdoc="" class="form-control editor" frameborder="0"></iframe>
+                <iframe #resultCode srcdoc="" class="iframe-resultado" frameborder="0"></iframe>
             </div>
         </div>
 

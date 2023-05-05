@@ -9,18 +9,10 @@ import { CreateLoginDto } from '../models/login.dto'
 })
 export class UsuariosService {
   //api: string = 'http://20.239.195.88:3000';
-  //api: string = 'http://localhost:3000';
-  api: string = 'https://tigershare.eastasia.cloudapp.azure.com';
+  api: string = 'http://localhost:3000';
+  //api: string = 'https://tigershare.eastasia.cloudapp.azure.com';
 
   constructor(private httpClient:HttpClient) { }
-
-  /**
-   * Obtiene todos los usuarios
-   * @returns 
-   */
-  getAllsUsers():Observable<any> {
-    return this.httpClient.get(`${this.api}/usr`,{});
-  }
 
   /**
    * Obtiene la informacion de un usuario por su token

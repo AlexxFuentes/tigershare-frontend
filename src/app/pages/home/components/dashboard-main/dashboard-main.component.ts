@@ -20,6 +20,7 @@ export class DashboardMainComponent implements OnInit {
   // variables
   interruptor: boolean = false;
   infoUser: any = {};
+  infoProjectsUser: any = {};
   lastProjects: any = [];
   dataProject: any = {};
 
@@ -39,14 +40,22 @@ export class DashboardMainComponent implements OnInit {
     this.comunicacion.actualizar$.subscribe(() => this.open());
     this.getInfoUser();
     this.getTopProjects();
+    this.getInfoProjectsUser();
 
-    this.RenderChart(['Creados','Disponibles'], [12, 50], ['#7741BD', '#040B25'], 'doughnut', 'piechart');
+    setTimeout(() => {
+      this.RenderChart(
+        ['Creados','Disponibles'], 
+        [this.infoProjectsUser.cantPro, this.infoProjectsUser.maxPro - this.infoProjectsUser.cantPro], 
+        ['#7741BD', '#040B25'], 
+        'doughnut', 'piechart'
+      );
+    }, 1000);
+
   }
 
   getInfoUser() {
     this.usrService.getInfoUser(sessionStorage.getItem('token') || '').subscribe(
       (data) => {
-        //console.log(data);
         this.infoUser = data;
       },
       (error) => {
@@ -55,10 +64,20 @@ export class DashboardMainComponent implements OnInit {
     )
   }
 
+  getInfoProjectsUser() {
+    this.projectService.infoProject(sessionStorage.getItem('token') || '').subscribe(
+      (data) => {
+        this.infoProjectsUser = data;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
   getTopProjects() {
     this.projectService.getLastsProjects(sessionStorage.getItem('token') || '').subscribe(
       (data) => {
-        //console.log(data);
         this.lastProjects = data;
       },
       (error) => {

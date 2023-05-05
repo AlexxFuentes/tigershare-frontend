@@ -3,52 +3,205 @@
         <div class="row d-flex justify-content-center h-auto">
             <div class="col-10" style="color: #fff;">
 
-                <div class="col-12 d-flex justify-content-between pt-4 pb-3">
+                <div class="col-12 d-flex justify-content-between pt-5 pb-3">
                     <h3>Bienvenido, {{infoUser.nombre}} {{infoUser.apellido}}</h3>
                     <img src="../../assets/img/male_avatar_.svg" alt="" width="50px" height="50px">
                 </div>
 
                 <h2>Configuraciones</h2>
 
-                <div class="mb-3 d-flex align-items-center pt-5 pb-2">
-                    <img src="../../assets/img/male_avatar_.svg" alt="" width="50px" height="50px">
-                    <div class="px-5">
-                        <div class="d-flex align-items-center">
-                            <strong>{{infoUser.user}}</strong>
-                            <button class="btn"><fa-icon [icon]="faPenToSquare" class="icon"></fa-icon></button>
+                <div class="mb-3 d-flex align-items-center pt-5 pb-2 w-100">
+                    <div class="px-1 w-100">
+                        <div class="d-flex align-items-center justify-content-between gap-3">
+                            <p class="mb-0"><strong>Usuario:</strong> {{infoUser.user}}</p>
+                            <button (click)="openModalEditUser(modalEditUser)" class="btn"><fa-icon [icon]="faPenToSquare" class="icon"></fa-icon>Editar</button>
                         </div>
-                        <small>{{infoUser.email}}</small>
+                        <div class="d-flex flex-column gap-3">
+                            <p class="mb-0"><strong>Email:</strong> {{infoUser.email}}</p>
+                            <p class="mb-0"><strong>Nombre:</strong> {{infoUser.nombre}}</p>
+                            <p class="mb-0"><strong>Apellido:</strong> {{infoUser.apellido}}</p>
+
+                            <div class="d-flex align-items-center justify-content-between gap-3">
+                                <p class="mb-0"><strong>Plan:</strong> {{infoUser.plan}}</p>
+                                <button (click)="openModalEditPlan(modalCambiarPlan)" class="btn"><fa-icon [icon]="faPenToSquare" class="icon"></fa-icon>Cambiar plan</button>
+                            </div>
+
+                            <button (click)="openModalEditPass(modalCambiarContra)" class="btn"><fa-icon [icon]="faPenToSquare" class="icon"></fa-icon>Cambiar contraseña</button>
+                        </div>
                     </div>
                 </div>
 
-                <div class="row pt-5 h-auto">
-                    <div class="col-6">
-                        <div class="form-check form-switch pb-5">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-                            <label class="form-check-label" for="flexSwitchCheckChecked">Tus proyectos son públicos</label>
-                        </div>
-                        <div class="form-check form-switch pb-5">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-                            <label class="form-check-label" for="flexSwitchCheckChecked">Culaquier usuario puede hacerse colaborador</label>
-                        </div>
-                        <div class="form-check form-switch pb-5">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-                            <label class="form-check-label" for="flexSwitchCheckChecked">Tu perfil es público</label>
-                        </div>
-                    </div>
-
-                    <div class="col-6">
-                        <div class="form-check form-switch pb-5">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-                            <label class="form-check-label" for="flexSwitchCheckChecked">Tus snippets se cargan automaticamente</label>
-                        </div>
-                        <div class="form-check form-switch pb-5">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-                            <label class="form-check-label" for="flexSwitchCheckChecked">El cobro de plan es automatico</label>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 </section>
+
+<ng-template #modalEditUser let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Editar datos</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<form [formGroup]="formularioEditarUsuario">
+
+            <div class="mb-3">
+                <label for="userInput" class="col-form-label">Usuario</label>
+                <input 
+                formControlName="user"
+                [ngClass]="{'input-error': user?.invalid && (user?.dirty || user?.touched)}"
+                type="text" name="user" class="form-control" id="userInput" 
+                placeholder="Usuario" required>
+            </div>
+            <div *ngIf="user?.invalid && (user?.dirty || user?.touched)" class="error">
+                <span *ngIf="user?.errors?.['required']">El nombre de usuario es obligatorio.</span>
+                <span *ngIf="user?.errors?.['pattern']">El nombre de usuario  solo puede tener letras y números.</span>
+                <span *ngIf="user?.errors?.['maxlength']">Cantidad máxima de caracteres es 30.</span>
+            </div>
+
+            <div class="mb-3">
+                <label for="emailInput" class="col-form-label">Correo electrónico</label>
+                <input 
+                formControlName="email"
+                [ngClass]="{'input-error': email?.invalid && (email?.dirty || email?.touched)}"
+                type="email" name="email" class="form-control" id="emailInput" 
+                placeholder="desarrollador@gmail.com" required>
+            </div>
+            <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="error">
+                <span *ngIf="email?.errors?.['required']">El correo electrónico es obligatorio.</span>
+                <span *ngIf="email?.errors?.['pattern']">El correo electrónico que ingreso es invalido.</span>
+                <span *ngIf="email?.errors?.['maxlength']">Cantidad máxima de caracteres es 55.</span>
+            </div>
+
+            <div class="mb-3">
+                <label for="nombresInput" class="col-form-label">Nombres</label>
+                <input 
+                formControlName="nombres"
+                [ngClass]="{'input-error': nombres?.invalid && (nombres?.dirty || nombres?.touched)}"
+                type="text" name="nombres" class="form-control" id="nombresInput" 
+                placeholder="Nombre de usuario" required>
+            </div>
+            <div *ngIf="nombres?.invalid && (nombres?.dirty || nombres?.touched)" class="error">
+                <span *ngIf="nombres?.errors?.['required']">El nombre de usuario es obligatorio.</span>
+                <span *ngIf="nombres?.errors?.['pattern']">El nombre solo deve contener letras y espacios.</span>
+                <span *ngIf="nombres?.errors?.['maxlength']">Cantidad máxima de caracteres es 40.</span>
+            </div>
+
+
+            <div class="mb-3">
+                <label for="apellidosInput" class="col-form-label">Apellidos</label>
+                <input 
+                formControlName="apellidos"
+                [ngClass]="{'input-error': apellidos?.invalid && (apellidos?.dirty || apellidos?.touched)}"
+                type="text" name="apellidos" class="form-control" id="apellidosInput" 
+                placeholder="Apellidos de usuario" required>
+            </div>
+            <div *ngIf="apellidos?.invalid && (apellidos?.dirty || apellidos?.touched)" class="error">
+                <span *ngIf="apellidos?.errors?.['required']">El nombre de usuario es obligatorio.</span>
+                <span *ngIf="apellidos?.errors?.['pattern']">El nombre solo deve contener letras y espacios.</span>
+                <span *ngIf="apellidos?.errors?.['maxlength']">Cantidad máxima de caracteres es 40.</span>
+            </div>
+
+        </form>
+	</div>
+	<div class="modal-footer">
+		<button [disabled]="!formularioEditarUsuario.valid" type="button" class="btn bg-dark" (click)="actualizarUsuario()">Guardar</button>
+	</div>
+</ng-template>
+
+<ng-template #modalCambiarContra let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Cambiar Contraseña</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<form [formGroup]="formularioCambiarPassword">
+
+            <div class="mb-3">
+                <label for="oldPasswordInput" class="form-label">Contraseña actual</label>
+                <input 
+                formControlName="oldPassword"
+                [ngClass]="{'input-error': oldPassword?.invalid && (oldPassword?.dirty || oldPassword?.touched)}"
+                type="password" name="oldPassword" class="form-control" id="oldPasswordInput" 
+                placeholder="************" required >
+            </div>
+            <div *ngIf="oldPassword?.invalid && (oldPassword?.dirty || oldPassword?.touched)" class="error">
+                <span *ngIf="oldPassword?.errors?.['required']">Su contraseña es obligatoria.</span>
+                <span *ngIf="oldPassword?.errors?.['maxlength']">Cantidad máxima de caracteres es 25.</span>
+                
+                <div *ngIf="oldPassword?.updateOn">
+                    <span *ngIf="password?.errors?.['matchPassword']">Las contraseñas no coinciden.</span>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="passwordInput" class="form-label">Contraseña</label>
+                <input 
+                formControlName="password"
+                [ngClass]="{'input-error': password?.invalid && (password?.dirty || password?.touched)}"
+                type="password" name="password" class="form-control" id="passwordInput" 
+                placeholder="************" required >
+            </div>
+            <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="error">
+                <span *ngIf="password?.errors?.['required']">Su contraseña es obligatoria.</span>
+                <span *ngIf="password?.errors?.['maxlength']">Cantidad máxima de caracteres es 25.</span>
+                
+                <div *ngIf="password?.updateOn">
+                    <span *ngIf="password?.errors?.['matchPassword']">Las contraseñas no coinciden.</span>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="confirmPasswordInput" class="form-label">Confirmar contraseña</label>
+                <input 
+                formControlName="confirmPassword"
+                [ngClass]="{'input-error': confirmPassword?.invalid && (confirmPassword?.dirty || confirmPassword?.touched)}"
+                type="password" name="confirPassword" class="form-control" id="confirPasswordInput" 
+                placeholder="************" required ><!--(blur)="matchPassword()"-->
+            </div>
+            <div *ngIf="confirmPassword?.invalid && (confirmPassword?.dirty || confirmPassword?.touched)" class="error">
+                <span *ngIf="confirmPassword?.errors?.['required']">Su contraseña es obligatoria.</span>
+                <span *ngIf="confirmPassword?.errors?.['maxlength']">Cantidad máxima de caracteres es 25.</span>
+                
+                <div *ngIf="confirmPassword?.updateOn">
+                    <span *ngIf="confirmPassword?.errors?.['matchPassword']">Las contraseñas no coinciden.</span>
+                </div>
+            </div>
+
+        </form>
+	</div>
+	<div class="modal-footer">
+		<button [disabled]="!formularioCambiarPassword.valid" type="button" class="btn bg-black" (click)="actualizarPass()">Guardar</button>
+	</div>
+</ng-template>
+
+<ng-template #modalCambiarPlan let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Cambiar Plan</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<form [formGroup]="formularioCambiarPlan">
+            <div class="mb-3 p-1 col">
+
+                <label for="planInput" class="form-label">Plan</label>
+                <select 
+                formControlName="plan"
+                [ngClass]="{'input-error': plan?.invalid && (plan?.dirty || plan?.touched)}"
+                class="form-select" name="plan" id="planInput" aria-label="Default select example">
+                    <option selected disabled>Plan</option>
+                    <option value="Rookie">Rookie</option>
+                    <option value="Elite">Elite</option>
+                    <option value="Ally">Ally</option>
+                </select>
+
+                <div *ngIf="plan?.invalid && (plan?.dirty || plan?.touched)" class="error">
+                    <span *ngIf="plan?.errors?.['required']">Su plan es obligatoria.</span>
+                </div>
+
+            </div>
+        </form>
+	</div>
+	<div class="modal-footer">
+		<button [disabled]="!formularioCambiarPlan.valid" type="button" class="btn bg-black" (click)="actualizarPlan()">Guardar</button>
+	</div>
+</ng-template>
