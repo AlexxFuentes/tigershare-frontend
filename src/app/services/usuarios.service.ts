@@ -22,6 +22,26 @@ export class UsuariosService {
   getInfoUser(token: string):Observable<any> {
     return this.httpClient.get(`${this.api}/usr/${token}`);
   }
+
+  /**
+   * Actualiza la informacion de un usuario
+   * @param token 
+   * @param data 
+   * @returns true or false
+   */
+  updateInfoUser(token: string, data: any):Observable<any> {
+    return this.httpClient.put(`${this.api}/usr/actualizar/${token}`, data);
+  }
+
+  /**
+   * Actualiza la contraseña de un usuario
+   * @param token 
+   * @param pass 
+   * @returns 
+   */
+  updatePassword(token: string, pass: string):Observable<any> {
+    return this.httpClient.put(`${this.api}/usr/actualizarPassword/${token}`, {pass});
+  }
   
   /**
    * Permite iniciar sesion

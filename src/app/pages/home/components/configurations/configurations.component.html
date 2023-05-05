@@ -20,13 +20,11 @@
                             <p class="mb-0"><strong>Email:</strong> {{infoUser.email}}</p>
                             <p class="mb-0"><strong>Nombre:</strong> {{infoUser.nombre}}</p>
                             <p class="mb-0"><strong>Apellido:</strong> {{infoUser.apellido}}</p>
+                            <p class="mb-0"><strong>Plan:</strong> {{infoUser.plan}}</p>
 
-                            <div class="d-flex align-items-center justify-content-between gap-3">
-                                <p class="mb-0"><strong>Plan:</strong> {{infoUser.plan}}</p>
-                                <button (click)="openModalEditPlan(modalCambiarPlan)" class="btn"><fa-icon [icon]="faPenToSquare" class="icon"></fa-icon>Cambiar plan</button>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <button (click)="openModalEditPass(modalCambiarContra)" class="btn"><fa-icon [icon]="faPenToSquare" class="icon"></fa-icon>Cambiar contraseña</button>
                             </div>
-
-                            <button (click)="openModalEditPass(modalCambiarContra)" class="btn"><fa-icon [icon]="faPenToSquare" class="icon"></fa-icon>Cambiar contraseña</button>
                         </div>
                     </div>
                 </div>
@@ -101,6 +99,23 @@
                 <span *ngIf="apellidos?.errors?.['maxlength']">Cantidad máxima de caracteres es 40.</span>
             </div>
 
+            <div class="mb-3 p-1 col">
+                <label for="planInput" class="form-label">Plan</label>
+                <select 
+                formControlName="plan"
+                [ngClass]="{'input-error': plan?.invalid && (plan?.dirty || plan?.touched)}"
+                class="form-select" name="plan" id="planInput" aria-label="Default select example">
+                    <option selected disabled>Plan</option>
+                    <option value="Rookie">Rookie</option>
+                    <option value="Elite">Elite</option>
+                    <option value="Ally">Ally</option>
+                </select>
+
+                <div *ngIf="plan?.invalid && (plan?.dirty || plan?.touched)" class="error">
+                    <span *ngIf="plan?.errors?.['required']">Su plan es obligatoria.</span>
+                </div>
+            </div>
+
         </form>
 	</div>
 	<div class="modal-footer">
@@ -156,7 +171,7 @@
                 formControlName="confirmPassword"
                 [ngClass]="{'input-error': confirmPassword?.invalid && (confirmPassword?.dirty || confirmPassword?.touched)}"
                 type="password" name="confirPassword" class="form-control" id="confirPasswordInput" 
-                placeholder="************" required ><!--(blur)="matchPassword()"-->
+                placeholder="************" required >
             </div>
             <div *ngIf="confirmPassword?.invalid && (confirmPassword?.dirty || confirmPassword?.touched)" class="error">
                 <span *ngIf="confirmPassword?.errors?.['required']">Su contraseña es obligatoria.</span>
@@ -171,37 +186,5 @@
 	</div>
 	<div class="modal-footer">
 		<button [disabled]="!formularioCambiarPassword.valid" type="button" class="btn bg-black" (click)="actualizarPass()">Guardar</button>
-	</div>
-</ng-template>
-
-<ng-template #modalCambiarPlan let-modal>
-	<div class="modal-header">
-		<h4 class="modal-title" id="modal-basic-title">Cambiar Plan</h4>
-		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-	</div>
-	<div class="modal-body">
-		<form [formGroup]="formularioCambiarPlan">
-            <div class="mb-3 p-1 col">
-
-                <label for="planInput" class="form-label">Plan</label>
-                <select 
-                formControlName="plan"
-                [ngClass]="{'input-error': plan?.invalid && (plan?.dirty || plan?.touched)}"
-                class="form-select" name="plan" id="planInput" aria-label="Default select example">
-                    <option selected disabled>Plan</option>
-                    <option value="Rookie">Rookie</option>
-                    <option value="Elite">Elite</option>
-                    <option value="Ally">Ally</option>
-                </select>
-
-                <div *ngIf="plan?.invalid && (plan?.dirty || plan?.touched)" class="error">
-                    <span *ngIf="plan?.errors?.['required']">Su plan es obligatoria.</span>
-                </div>
-
-            </div>
-        </form>
-	</div>
-	<div class="modal-footer">
-		<button [disabled]="!formularioCambiarPlan.valid" type="button" class="btn bg-black" (click)="actualizarPlan()">Guardar</button>
 	</div>
 </ng-template>
