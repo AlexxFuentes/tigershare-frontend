@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class NotFoundComponent {
 
+  constructor() {
+    localStorage.removeItem('id_project');
+    localStorage.removeItem('codeHTML');
+    localStorage.removeItem('codeJS');
+    localStorage.removeItem('codeCSS');
+  }
 }

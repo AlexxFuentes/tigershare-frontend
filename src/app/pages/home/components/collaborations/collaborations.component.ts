@@ -26,7 +26,12 @@ export class CollaborationsComponent implements OnInit {
     private projectService: ProyectosService,
     private comunicacion: ComunicacionService,
     private router: Router,
-  ) { }
+  ) { 
+    localStorage.removeItem('id_project');
+    localStorage.removeItem('codeHTML');
+    localStorage.removeItem('codeJS');
+    localStorage.removeItem('codeCSS');
+  }
 
   ngOnInit(): void {
     this.comunicacion.actualizar$.subscribe(() => this.open());

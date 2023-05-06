@@ -38,7 +38,12 @@ export class ConfigurationsComponent {
     private usrService: UsuariosService,
     private modalService: NgbModal,
     private toastr: ToastrService,
-  ) { }
+  ) { 
+    localStorage.removeItem('id_project');
+    localStorage.removeItem('codeHTML');
+    localStorage.removeItem('codeJS');
+    localStorage.removeItem('codeCSS');
+  }
 
   ngOnInit(): void {
     this.comunicacion.actualizar$.subscribe(() => this.open());

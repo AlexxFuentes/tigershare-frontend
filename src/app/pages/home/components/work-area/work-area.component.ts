@@ -3,7 +3,7 @@ import { faUser, faCloud, faCode, faFolder, faFileExport, faFloppyDisk, faUserPl
 import { ComunicacionService } from 'src/app/services/comunicacion.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProyectosService } from 'src/app/services/proyectos.service';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { ToastrService } from 'ngx-toastr';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -79,12 +79,20 @@ export class WorkAreaComponent implements OnInit {
     private projectService: ProyectosService,
     private modalService: NgbModal, 
     private router: Router,
-    private activeRoute: ActivatedRoute,
     private clipboard: Clipboard,
     private toastr: ToastrService,
   ) { 
     if(localStorage.getItem('id_project')){
       this.getProjectById(localStorage.getItem('id_project') || '');
+    }
+    if(localStorage.getItem('codeHTML')){
+      this.codeHTML = localStorage.getItem('codeHTML') || '';
+    }
+    if(localStorage.getItem('codeJS')){
+      this.codeJS = localStorage.getItem('codeJS') || '';
+    }
+    if(localStorage.getItem('codeCSS')){
+      this.codeCSS = localStorage.getItem('codeCSS') || '';
     }
   }
   

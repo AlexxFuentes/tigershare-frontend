@@ -10,4 +10,11 @@ export class LandingPageComponent {
   faHtml5 = faHtml5;
   faCss3Alt = faCss3Alt;
   faJsSquare = faJsSquare;
+
+  constructor() {
+    localStorage.removeItem('id_project');
+    localStorage.removeItem('codeHTML');
+    localStorage.removeItem('codeJS');
+    localStorage.removeItem('codeCSS');
+  }
 }

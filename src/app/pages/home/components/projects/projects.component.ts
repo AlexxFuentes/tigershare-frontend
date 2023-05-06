@@ -42,13 +42,18 @@ export class ProjectsComponent implements OnInit{
     private modalService: NgbModal,
     private router: Router,
     private toastr: ToastrService,
-  ) {}
+  ) {
+    localStorage.removeItem('id_project');
+    localStorage.removeItem('codeHTML');
+    localStorage.removeItem('codeJS');
+    localStorage.removeItem('codeCSS');
+  }
 
   ngOnInit(): void {
     this.comunicacion.actualizar$.subscribe(() => this.open());
     this.getAllsProjects();
     this.getInfoProjectsUser();
-    localStorage.removeItem('id_project');
+    //localStorage.removeItem('id_project');
   }
 
   open() {

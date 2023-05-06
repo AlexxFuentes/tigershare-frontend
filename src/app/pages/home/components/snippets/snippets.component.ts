@@ -14,7 +14,12 @@ export class SnippetsComponent {
   // variables
   interruptor: boolean = false;
 
-  constructor(private comunicacion: ComunicacionService) {}
+  constructor(private comunicacion: ComunicacionService) {
+    localStorage.removeItem('id_project');
+    localStorage.removeItem('codeHTML');
+    localStorage.removeItem('codeJS');
+    localStorage.removeItem('codeCSS');
+  }
 
   ngOnInit(): void {
     this.comunicacion.actualizar$.subscribe(() => this.open());

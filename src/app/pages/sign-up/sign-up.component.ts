@@ -48,7 +48,12 @@ export class SignUpComponent implements OnInit {
     private authService: AuthService, 
     private authSocialService: SocialAuthService,
     private router: Router,
-  ) {}
+  ) {
+    localStorage.removeItem('id_project');
+    localStorage.removeItem('codeHTML');
+    localStorage.removeItem('codeJS');
+    localStorage.removeItem('codeCSS');
+  }
   
   ngOnInit(): void {
     this.authSocialService.authState.subscribe((user) => {
