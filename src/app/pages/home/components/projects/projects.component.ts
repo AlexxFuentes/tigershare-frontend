@@ -25,6 +25,7 @@ export class ProjectsComponent implements OnInit{
   interruptor: boolean = false;
   allsProjects: any = [];
   dataProject: any = {};
+  infoProjectsUser: any = {};
 
   // Formulario nuevo proyecto
   formularioNewProject = new FormGroup({
@@ -46,6 +47,7 @@ export class ProjectsComponent implements OnInit{
   ngOnInit(): void {
     this.comunicacion.actualizar$.subscribe(() => this.open());
     this.getAllsProjects();
+    this.getInfoProjectsUser();
     localStorage.removeItem('id_project');
   }
 
@@ -81,10 +83,17 @@ export class ProjectsComponent implements OnInit{
       sessionStorage.getItem('token') ?? '',
       nombre ?? ''
     );
+
+    if(this.infoProjectsUser.cantPro === this.infoProjectsUser.maxPro){
+      this.toastr.error('Número máximo alcanzado', 'No puedes crear más proyectos');
+      return;
+    }
     this.projectService.createNewProject(dataNewProject).subscribe(
       (res) => {
         this.getAllsProjects();
         this.showSuccess();
+        this.getInfoProjectsUser();
+        this.formularioNewProject.reset();
       },
       (err) => {
         console.log(err);
@@ -98,6 +107,7 @@ export class ProjectsComponent implements OnInit{
       (res) => {
         this.dataProject = res;
         this.comunicacion.sendDataProject(this.dataProject);
+        this.getInfoProjectsUser();
       },
       (err) => {
         console.log(err);
@@ -121,9 +131,21 @@ export class ProjectsComponent implements OnInit{
     this.projectService.deleteProject(id).subscribe(
       (res) => {
         this.getAllsProjects();
+        this.getInfoProjectsUser();
       },
       (err) => {
         console.log(err);
+      }
+    );
+  }
+
+  getInfoProjectsUser() {
+    this.projectService.infoProject(sessionStorage.getItem('token') || '').subscribe(
+      (data) => {
+        this.infoProjectsUser = data;
+      },
+      (error) => {
+        console.log(error);
       }
     );
   }
