@@ -51,7 +51,6 @@ export class LogInComponent implements OnInit {
         this.usrService.singInFacebook(newUser).subscribe(
           (data) => {
             if(data.token) {
-              console.log(data.token);
               this.authService.token = data.token;
               this.router.navigate(['home/general-information']);
             }
