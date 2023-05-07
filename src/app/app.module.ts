@@ -65,12 +65,6 @@ import { FacebookLoginProvider, SocialAuthServiceConfig, SocialLoginModule } fro
       useValue: {
         autoLogin: false,
         providers: [
-          // {
-          //   id: GoogleLoginProvider.PROVIDER_ID,
-          //   provider: new GoogleLoginProvider(
-          //     'clientId'
-          //   )
-          // },
           {
             id: FacebookLoginProvider.PROVIDER_ID,
             provider: new FacebookLoginProvider('771970044370509')
