@@ -139,7 +139,6 @@ export class WorkAreaComponent implements OnInit {
 
   copyLink() {
     const link: string = 'https://tigershare.vercel.app//work-area-publica/' + this.dataProject._id;
-    //const link: string = 'http://localhost:4200/work-area-publica/' + this.dataProject._id;
     this.clipboard.copy(link);
     this.toastr.success('Link copiado al portapapeles', 'Copiado', {});
   }
@@ -183,12 +182,17 @@ export class WorkAreaComponent implements OnInit {
   }
 
   addCollaborator() {
-    this.projectService.addCollaborator(this.dataProject._id, this.formCollaborator.value.email ?? '').subscribe(
+    const token = sessionStorage.getItem('token');
+    this.projectService.addCollaborator(token ?? '', this.dataProject._id, this.formCollaborator.value.email ?? '').subscribe(
       (res) => {
-        console.log(res);
-        this.getProjectById(this.dataProject._id);
-        this.toastr.success('Colaborador añadido', 'Añadido', {});
-        this.modalService.dismissAll();
+        if(res) {
+          this.getProjectById(this.dataProject._id);
+          this.toastr.success('Colaborador añadido', 'Añadido', {});
+          this.formCollaborator.reset();
+          this.modalService.dismissAll();
+        } else {
+          this.toastr.error('No se pudo agregar como colaborador', 'Error', {});
+        }
       },
       (err) => {
         console.log(err);
@@ -237,7 +241,6 @@ export class WorkAreaComponent implements OnInit {
   }
 
   showDateString(u_mod: any) {
-    console.log(u_mod);
     const now = moment();
     const dateModified = moment.utc(u_mod, 'YYYYMMDD');
     const timeZoneOffset = moment().utcOffset();

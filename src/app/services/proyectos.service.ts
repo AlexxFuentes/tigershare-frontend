@@ -60,8 +60,8 @@ export class ProyectosService {
    * @param email 
    * @returns 
    */
-  addCollaborator(pro_id: string, email: string):Observable<any> {
-    return this.httpClient.put(`${this.api}/proyecto/colab`, { pro_id, email });
+  addCollaborator(token: string, pro_id: string, email: string):Observable<any> {
+    return this.httpClient.put(`${this.api}/proyecto/colab`, { token, pro_id, email });
   }
 
   /**

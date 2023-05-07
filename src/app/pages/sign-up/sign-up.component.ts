@@ -6,6 +6,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 import { SocialAuthService, SocialUser } from "@abacritt/angularx-social-login";
 import { FacebookLoginProvider } from "@abacritt/angularx-social-login";
 import { AuthService } from 'src/app/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
 @Component({
@@ -48,6 +49,7 @@ export class SignUpComponent implements OnInit {
     private authService: AuthService, 
     private authSocialService: SocialAuthService,
     private router: Router,
+    private toastr: ToastrService,
   ) {
     localStorage.removeItem('id_project');
     localStorage.removeItem('codeHTML');
@@ -88,9 +90,10 @@ export class SignUpComponent implements OnInit {
       const newUser = new CreateUserDto(nombres ?? '', apellidos ?? '', user ?? '', email ?? '', password ?? '', plan ?? '', new Date(fechaNacimiento ?? ''));
       this.usrService.singUp(newUser).subscribe(
         (token) => {
-          console.log(token);
-          this.authService.token = token;
-          this.router.navigate(['home/general-information']);
+          if(token) {
+            this.toastr.success('Usuario registrado con éxito', 'Registro exitoso');
+            this.router.navigate(['log-in']);
+          }
         },
         (error) => {
           console.log(error);
