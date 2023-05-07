@@ -54,7 +54,7 @@ export class DashboardMainComponent implements OnInit {
         ['#7741BD', '#040B25'], 
         'doughnut', 'piechart'
       );
-    }, 1000);
+    }, 2000);
 
   }
 
