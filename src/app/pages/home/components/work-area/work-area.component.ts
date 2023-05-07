@@ -8,7 +8,6 @@ import { Clipboard } from '@angular/cdk/clipboard';
 import { ToastrService } from 'ngx-toastr';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
-import 'moment-timezone';
 
 @Component({
   selector: 'app-work-area',
