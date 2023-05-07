@@ -114,8 +114,13 @@ export class DashboardMainComponent implements OnInit {
   }
 
   showDateString(u_mod: any) {
+    const now = moment();
     moment.locale('es');
-    return moment(u_mod, 'YYYYMMDD').fromNow();
+    const dateModified = moment.utc(u_mod, 'YYYYMMDD');
+    const timeZoneOffset = moment().utcOffset();
+    const adjustedDate = dateModified.utcOffset(timeZoneOffset);
+  
+    return adjustedDate.from(now);
   }
 
   RenderChart(labeldata: any, maindata: any, colordata: any, type: any, id: any) {

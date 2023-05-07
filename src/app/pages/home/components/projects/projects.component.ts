@@ -183,8 +183,13 @@ export class ProjectsComponent implements OnInit{
     }).onTap.subscribe(() => this.deleteProject(id));
   }
   
-  showDateString(u_mod:any){
+  showDateString(u_mod: any) {
+    const now = moment();
     moment.locale('es');
-    return moment(u_mod,'YYYYMMDD').fromNow();
+    const dateModified = moment.utc(u_mod, 'YYYYMMDD');
+    const timeZoneOffset = moment().utcOffset();
+    const adjustedDate = dateModified.utcOffset(timeZoneOffset);
+  
+    return adjustedDate.from(now);
   }
 }

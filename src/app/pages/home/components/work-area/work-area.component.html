@@ -20,7 +20,7 @@
                     <p>
                         <strong>Creado por: </strong> {{dataProject?.creador?.nombre}} {{dataProject?.creador?.apellido}}
                         <br>
-                        <small>Última modificación: {{showDateString(dataProject?.u_mod)}}</small>
+                        <small>Última modificación {{showDateString(dataProject?.u_mod)}}</small>
                     </p>
                 </div>
                 <!--Colaboradores-->
@@ -92,7 +92,7 @@
         </form>
 	</div>
 	<div class="modal-footer">
-		<button [disabled]="!formCollaborator.valid" type="button" class="btn" (click)="addCollaborator()">Guardar colaborador</button>
+		<button [disabled]="!formCollaborator.valid" type="button" class="btn btn-dark" (click)="addCollaborator()">Guardar colaborador</button>
 	</div>
 </ng-template>
 
@@ -105,6 +105,6 @@
 		<p>¿Estás seguro que quieres salir de la página sin antes guardar los cambios de tu proyecto?</p>
 	</div>
 	<div class="modal-footer">
-		<button type="button" class="btn" (click)="saveChanges()">Guardar cambios</button>
+		<button type="button" class="btn btn-dark" (click)="saveChanges()">Guardar cambios</button>
 	</div>
 </ng-template>

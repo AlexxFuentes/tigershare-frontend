@@ -8,6 +8,7 @@ import { Clipboard } from '@angular/cdk/clipboard';
 import { ToastrService } from 'ngx-toastr';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
+import 'moment-timezone';
 
 @Component({
   selector: 'app-work-area',
@@ -237,8 +238,13 @@ export class WorkAreaComponent implements OnInit {
     this.toastr.success('', 'Guardar cambios');
   }
 
-  showDateString(u_mod:any){
-    moment.locale('es');
-    return moment(u_mod,'YYYYMMDD').fromNow();
+  showDateString(u_mod: any) {
+    console.log(u_mod);
+    const now = moment();
+    const dateModified = moment.utc(u_mod, 'YYYYMMDD');
+    const timeZoneOffset = moment().utcOffset();
+    const adjustedDate = dateModified.utcOffset(timeZoneOffset);
+  
+    return adjustedDate.from(now);
   }
 }
