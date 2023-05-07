@@ -232,7 +232,6 @@ export class WorkAreaComponent implements OnInit {
     return Array.from({length: n}, (_, i) => i + 1);
   }
 
-  // show: Guardar cambios
   showSaveChanges() {
     this.toastr.success('', 'Guardar cambios');
   }
