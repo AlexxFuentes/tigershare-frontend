@@ -30,40 +30,25 @@ export class HomeComponent {
 
   ngOnInit(): void {}
 
-  // cerrarSesion() {
-  //   if(this.authSocialService.authState) {
-  //     this.authSocialService.signOut().then(
-  //       () => {
-  //         this.authService.logOut();
-  //         this.router.navigate(['log-in']); 
-  //       }
-  //     );
-  //   }
-
-  //   this.authService.logOut();
-  //   this.router.navigate(['log-in']);  
-  //   localStorage.removeItem('codeHTML');
-  //   localStorage.removeItem('codeJS');
-  //   localStorage.removeItem('codeCSS');
-  //   localStorage.removeItem('id_project');
-  // }
   cerrarSesion() {
     localStorage.removeItem('codeHTML');
     localStorage.removeItem('codeJS');
     localStorage.removeItem('codeCSS');
     localStorage.removeItem('id_project');
-    if (this.authSocialService.authState) {
-      this.authSocialService.signOut().then(() => {
+
+    this.authSocialService.signOut().then(
+      () => {
         this.authService.logOut();
         this.router.navigate(['log-in']);
-      });
-    } else {
-      this.authService.logOut();
-      this.router.navigate(['log-in']);
-    }
+      }
+    ).catch(
+      (error) => {
+        this.authService.logOut();
+        this.router.navigate(['log-in']);
+      }
+    )
   }
   
-
   abrirNavLateral() {
     this.comunication.actualizar();
     this.sidebar?.nativeElement.classList.toggle('active-nav');
